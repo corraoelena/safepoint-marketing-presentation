@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafePoint IT — Adopting AI &amp; Cloud Safely: Speaker Script</title>
+<style>
+  :root{
+    --navy:#1E2761; --teal:#028090; --accent:#02C39A; --grey:#5A6472;
+    --light:#E8F1F5; --bg:#F4F8FA; --line:#DCE7EE; --dark:#1E293B;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--dark);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Calibri,Arial,sans-serif; line-height:1.55;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 18px 70px;}
+  .logobar{background:#fff; border-bottom:1px solid var(--line); padding:14px 18px;}
+  .logobar .inner{max-width:920px; margin:0 auto;}
+  .logobar img{height:46px; width:auto; display:block;}
+  header.hero{background:var(--navy); color:#fff; padding:34px 18px 28px; border-bottom:5px solid var(--accent);}
+  header.hero .inner{max-width:920px; margin:0 auto;}
+  header.hero .kicker{margin:0 0 6px; letter-spacing:3px; font-size:12px; font-weight:700; color:var(--accent);}
+  header.hero h1{margin:0; font-size:28px; font-weight:800;}
+  header.hero p{margin:8px 0 0; color:#CADCFC; font-size:16px;}
+  .intro{background:#fff; border:1px solid var(--line); border-left:5px solid var(--accent);
+    border-radius:8px; padding:16px 18px; margin:22px 0; font-size:14.5px; color:#333;}
+  .intro .legend{margin-top:8px; font-size:13px; color:var(--grey);}
+  section.card{background:#fff; border:1px solid var(--line); border-radius:10px;
+    padding:20px 22px; margin:18px 0; box-shadow:0 1px 3px rgba(30,39,97,.06);}
+  section.card h2{margin:0 0 4px; font-size:21px; color:var(--navy);}
+  .time{font-size:13px; color:var(--grey); font-weight:700; margin-bottom:10px;}
+  h3.sub{margin:16px 0 6px; font-size:16px; color:var(--dark);}
+  .purpose{font-size:14.5px; margin:6px 0 12px;}
+  .purpose b{color:var(--teal);}
+  .cue{display:inline-block; font-size:11px; letter-spacing:1px; font-weight:700; color:var(--navy);
+    background:var(--light); border-radius:5px; padding:3px 9px; margin:10px 0 6px;}
+  .cue::before{content:"◻ SLIDE — ";}
+  .say{border-left:4px solid var(--accent); background:#fbfdfd; border-radius:0 8px 8px 0;
+    padding:10px 16px; margin:10px 0; font-style:italic; color:#333;}
+  .say::before{content:"Say: "; font-style:normal; font-weight:700; color:var(--teal);}
+  .trial{background:#DDF3EE; border-radius:8px; padding:10px 14px; margin:12px 0; font-size:14.5px;}
+  .trial b{color:var(--teal);}
+  .belief{background:#FBF3E3; border-radius:8px; padding:8px 14px; margin:8px 0; font-size:14px; color:#7A5B00;}
+  .belief b{color:#946200;}
+  ul{margin:8px 0; padding-left:22px;} li{margin:4px 0;}
+  .note{font-size:13px; color:var(--grey); font-style:italic;}
+  /* run of show */
+  table.ros{width:100%; border-collapse:collapse; font-size:14px;}
+  table.ros th, table.ros td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top;}
+  table.ros th{background:var(--navy); color:#fff;}
+  table.ros td.done{text-align:center; width:54px;}
+  table.ros td.t{white-space:nowrap; width:110px; color:var(--grey); font-weight:600;}
+  /* stack table */
+  table.stack{width:100%; border-collapse:collapse; font-size:14.5px;}
+  table.stack th, table.stack td{border:1px solid var(--line); padding:9px 12px;}
+  table.stack th{background:var(--teal); color:#fff; text-align:left;}
+  table.stack td.v{text-align:right; font-weight:700; color:var(--teal); width:120px;}
+  table.stack tr.total td{background:var(--navy); color:#fff; font-weight:700;}
+  table.stack tr.total td.v{color:var(--accent);}
+  table.stack tr.bonus td{background:#E8F7F2;}
+  .domino{background:var(--navy); color:#fff; border-radius:10px; padding:18px 22px; margin:18px 0;}
+  .domino .lbl{font-size:12px; letter-spacing:2px; color:var(--accent); font-weight:700;}
+  .domino p{margin:8px 0 0; font-size:17px; line-height:1.5;}
+  .actions{position:sticky; bottom:0; background:rgba(244,248,250,.96); backdrop-filter:blur(4px);
+    border-top:1px solid var(--line); padding:14px 0; margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+  .btn{border:none; border-radius:8px; padding:12px 20px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;}
+  .btn-primary{background:var(--teal); color:#fff;} .btn-secondary{background:#fff; color:var(--navy); border:1px solid #c7d3db;}
+  .foot{text-align:center; color:var(--grey); font-size:13px; margin-top:24px;}
+  @media print{.actions{display:none;} body{background:#fff;} section.card{box-shadow:none; break-inside:avoid;}
+    header.hero,.domino,.say,.trial,.belief{-webkit-print-color-adjust:exact; print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<div class="logobar"><div class="inner"><img src="https://www.safepointit.com/wp-content/uploads/2026/01/SafePoint-Logo-Header.svg" alt="SafePoint IT"></div></div>
+<header class="hero"><div class="inner">
+  <p class="kicker">SPEAKER SCRIPT &amp; RUN-OF-SHOW</p>
+  <h1>Adopting AI &amp; Cloud Safely</h1>
+  <p>A SafePoint IT webinar for healthcare practices · structured on the Perfect Webinar formula</p>
+</div></header>
+
+<div class="wrap">
+  <div class="intro">
+    This is the run-of-show and speaker script for a 90-minute webinar following the Perfect Webinar sequence:
+    Hook → Origin Story → 3 Secrets → Stack → Close.
+    <div class="legend">Plain text = presenter notes &nbsp;·&nbsp; <em>“Say:” blocks = suggested word-for-word language</em> &nbsp;·&nbsp; SLIDE chips = deck cues. All dollar figures and the example client story are placeholders to confirm before presenting.</div>
+  </div>
+
+  <!-- RUN OF SHOW -->
+  <section class="card">
+    <h2>Run-of-show at a glance</h2>
+    <p class="note">Tick each segment as you deliver it (resets on reload).</p>
+    <table class="ros">
+      <tr><th class="done">Done</th><th>Segment</th><th>Time</th><th>Perfect Webinar purpose</th></tr>
+      <tr><td class="done"><input type="checkbox"></td><td>1. Introduction + Hook</td><td class="t">0:00–10:00</td><td>Big promise, build rapport, set the One Big Domino belief.</td></tr>
+      <tr><td class="done"><input type="checkbox"></td><td>2. Origin Story</td><td class="t">10:00–20:00</td><td>Earn trust; introduce the new opportunity / vehicle.</td></tr>
+      <tr><td class="done"><input type="checkbox"></td><td>3. Secret #1</td><td class="t">20:00–32:00</td><td>Break the VEHICLE belief (“AI/cloud isn't safe for us”).</td></tr>
+      <tr><td class="done"><input type="checkbox"></td><td>4. Secret #2</td><td class="t">32:00–44:00</td><td>Break the INTERNAL belief (“we can't pull this off”).</td></tr>
+      <tr><td class="done"><input type="checkbox"></td><td>5. Secret #3</td><td class="t">44:00–55:00</td><td>Break the EXTERNAL belief (“too costly / disruptive”).</td></tr>
+      <tr><td class="done"><input type="checkbox"></td><td>6. The Stack</td><td class="t">55:00–70:00</td><td>Present the offer item by item; build perceived value.</td></tr>
+      <tr><td class="done"><input type="checkbox"></td><td>7. The Close</td><td class="t">70:00–80:00</td><td>Price reveal, urgency/scarcity, guarantee, trial closes.</td></tr>
+      <tr><td class="done"><input type="checkbox"></td><td>8. Q&amp;A + Final Close</td><td class="t">80:00–90:00</td><td>Handle objections live; restate offer and deadline.</td></tr>
+    </table>
+  </section>
+
+  <div class="domino">
+    <div class="lbl">THE ONE BIG DOMINO</div>
+    <p>“If a healthcare practice puts a security-first foundation in place first, it can adopt AI and cloud tools that make clinicians faster — without risking a HIPAA breach, a budget blow-up, or downtime.” Believe that one thing, and every other objection falls.</p>
+  </div>
+
+  <!-- 1. INTRO -->
+  <section class="card">
+    <h2>1. Introduction + Hook</h2>
+    <div class="time">0:00–10:00</div>
+    <p class="purpose"><b>Purpose:</b> Open with energy, make a big specific promise, and establish the single belief everything hinges on. Do NOT teach yet.</p>
+    <span class="cue">Title slide — “Adopting AI &amp; Cloud Safely”</span>
+    <h3 class="sub">The hook (the big promise)</h3>
+    <div class="say">In the next 60 minutes you're going to learn exactly how to bring AI and cloud tools into your practice — the AI scribes, the patient-portal automations, the cloud EHRs everyone's talking about — without risking a HIPAA breach, without blowing your budget, and without slowing down a single clinician. By the end you'll know the one thing that separates the practices that adopt this safely from the ones that end up in a breach notification letter.</div>
+    <h3 class="sub">Set the stakes (why now)</h3>
+    <span class="cue">Stat slide — healthcare breach cost</span>
+    <ul>
+      <li>Healthcare has the most expensive data breaches of any industry for 14 years running — the U.S. average is now about $7.42 million per breach (IBM, 2025).</li>
+      <li>Healthcare breaches also take the longest to spot and contain: about 279 days on average.</li>
+      <li>Every vendor is shipping an “AI feature” and every clinician wants the time back. The pressure to adopt is real — and so is the exposure.</li>
+    </ul>
+    <div class="say">So you're caught between two bad options: move fast and risk patient data, or freeze and fall behind. Today I want to show you there's a third option.</div>
+    <h3 class="sub">Plant the Big Domino</h3>
+    <div class="say">Here's the one idea this whole session rests on: the danger was never the AI or the cloud itself. The danger is adopting it without a security foundation underneath. Put that foundation in first, and these tools become safer than the sticky-notes-and-spreadsheets way you're working today.</div>
+    <div class="trial"><b>Trial close:</b> “If that's true — if you really could adopt this stuff safely — would that change how you think about AI in your practice? Drop a ‘yes’ in the chat.”</div>
+  </section>
+
+  <!-- 2. ORIGIN -->
+  <section class="card">
+    <h2>2. Origin Story</h2>
+    <div class="time">10:00–20:00</div>
+    <p class="purpose"><b>Purpose:</b> Build trust and introduce the “vehicle” — your method — through story, not credentials.</p>
+    <span class="cue">Origin slide — SafePoint IT, 20+ years, Chicago, healthcare focus</span>
+    <h3 class="sub">Who we are (briefly)</h3>
+    <p>SafePoint IT is a Chicago managed-services provider. For 20+ years we've run IT and security for small and mid-sized organizations, with a deep bench in healthcare — practices that live and die by HIPAA, uptime, and patient trust.</p>
+    <h3 class="sub">The turning-point story</h3>
+    <p class="note">(Illustrative composite — replace with a real, de-identified SafePoint story before presenting.)</p>
+    <div class="say">A few years ago a clinic came to us in a panic. A well-meaning office manager had signed up for a free AI note-taking tool to save the doctors time. It worked beautifully — clinicians loved it. The problem: patient conversations were being sent to a vendor with no Business Associate Agreement, stored who-knows-where, and used to train a model. No malice. No hacker. Just a good tool adopted without a foundation — and a reportable HIPAA exposure waiting to happen.</div>
+    <div class="say">We caught it, contained it, and then we did something different. Instead of banning the tool, we built a security foundation around it: a vendor review, a signed BAA, access controls, and a simple roadmap. The clinicians kept their time-saver — safely. That's the moment the framework I'm about to share was born.</div>
+    <span class="cue">Vehicle slide — “The Secure Adoption Framework: foundation first, tools second”</span>
+    <div class="say">Out of that we built the Secure AI &amp; Cloud Adoption Framework — a foundation-first way to say YES to new tools instead of a blanket no. That's the vehicle I want to prove to you today, in three secrets.</div>
+  </section>
+
+  <!-- 3. SECRETS -->
+  <section class="card">
+    <h2>3. The Content — The 3 Secrets</h2>
+    <div class="time">20:00–55:00</div>
+    <p class="purpose">Each secret breaks ONE false belief. Teach real value in each — but every secret should leave the audience more convinced of the Big Domino.</p>
+
+    <h3 class="sub">Secret #1 — “AI and the cloud aren't safe for a practice like ours.”</h3>
+    <div class="belief"><b>Breaks the:</b> VEHICLE / opportunity false belief — that secure AI &amp; cloud adoption simply doesn't work for healthcare.</div>
+    <span class="cue">Secret 1 title slide</span>
+    <div class="say">It was never the tool that caused the breach. In almost every case I've seen, the tool was fine — the foundation was missing. Risk doesn't live in ‘AI’ or ‘the cloud.’ It lives in five gaps: no Business Associate Agreement, no idea where data goes, no access controls, no logging, and no one accountable for the vendor.</div>
+    <p><b>Teach this — the 5-gap checklist:</b></p>
+    <ul>
+      <li><b>BAA</b> — is there a signed Business Associate Agreement with every vendor touching PHI?</li>
+      <li><b>Data flow</b> — do you know where patient data is stored, processed, and whether it trains a model?</li>
+      <li><b>Access</b> — is access role-based, with MFA, and revoked when staff leave?</li>
+      <li><b>Visibility</b> — is activity logged so you'd actually notice misuse?</li>
+      <li><b>Ownership</b> — is one accountable party reviewing each tool, not “whoever signed up”?</li>
+    </ul>
+    <div class="say">Close those five and a cloud EHR or an AI scribe is demonstrably safer than the paper-and-email workflow it replaces — because now it's monitored, encrypted, and accountable. The status quo is the risky option.</div>
+    <div class="trial"><b>Trial close:</b> “How many of you have signed up for a tool without checking even one of these five? You're not careless — nobody handed you the checklist. Now you have it.”</div>
+
+    <h3 class="sub">Secret #2 — “We're too small and don't have the expertise.”</h3>
+    <div class="belief"><b>Breaks the:</b> INTERNAL false belief — that THEY personally can't pull it off, even if the method works.</div>
+    <span class="cue">Secret 2 title slide</span>
+    <div class="say">You do not need to become a security expert, and you do not need to hire a CISO. You need a foundation that's set up once and then maintained for you. The practices doing this well aren't the ones with big IT teams — they're the ones who stopped trying to do it alone.</div>
+    <p><b>Teach this — the co-managed model:</b></p>
+    <ul>
+      <li>Set-up-once foundation: assessment, BAAs, access controls and logging configured a single time, not reinvented per tool.</li>
+      <li>A simple “can we adopt this?” decision flow your front desk can actually follow.</li>
+      <li>A co-managed partner handles the security plumbing; your team keeps owning patient care.</li>
+      <li>Staff awareness training so the humans — the #1 breach vector — become a strength.</li>
+    </ul>
+    <div class="say">Small is actually an advantage here. Fewer systems, fewer vendors, and you can put a clean foundation in place in weeks, not years. Size isn't your obstacle — going it alone is.</div>
+    <div class="trial"><b>Trial close:</b> “If the security part was handled for you, and your team just had a simple yes/no checklist — that's doable for a practice your size, right?”</div>
+
+    <h3 class="sub">Secret #3 — “It's too expensive and it'll disrupt our clinicians.”</h3>
+    <div class="belief"><b>Breaks the:</b> EXTERNAL false belief — outside obstacles (cost, time, disruption to care) they believe will stop them.</div>
+    <span class="cue">Secret 3 title slide</span>
+    <div class="say">The expensive option is the breach — $7.42 million on average, and 279 days of your team's life spent cleaning it up. A security foundation is a rounding error next to that. And done right, it speeds clinicians up, because the safe path becomes the easy path instead of a series of nerve-wracking guesses.</div>
+    <p><b>Teach this — cost &amp; disruption, reframed:</b></p>
+    <ul>
+      <li>Cost of doing it right: a fixed, predictable monthly figure — known in advance, budgetable.</li>
+      <li>Cost of a breach: direct fines, lost patients, 279 days of disruption, reputational damage.</li>
+      <li>Disruption myth: a phased rollout means clinicians never lose a tool they rely on; they gain approved ones faster.</li>
+      <li>Speed dividend: when “is this allowed?” has a 30-second answer, adoption accelerates instead of stalling in fear.</li>
+    </ul>
+    <div class="say">So the real question isn't ‘can we afford to do this?’ It's ‘can we afford to keep adopting tools without it?’</div>
+    <div class="trial"><b>Trial close:</b> “When you compare a predictable monthly cost to a seven-figure breach — which one actually sounds expensive?”</div>
+  </section>
+
+  <!-- 4. STACK -->
+  <section class="card">
+    <h2>4. The Stack — The Offer</h2>
+    <div class="time">55:00–70:00</div>
+    <p class="purpose"><b>Purpose:</b> Reveal the offer one component at a time, restating the full stack after each addition. Do NOT say the price until the stack is complete.</p>
+    <span class="cue">Stack slide — reveal items one at a time, value column building</span>
+    <div class="say">So you believe it's possible, you believe you can do it, and you know it's worth it. The natural next question is: ‘What would it actually take to put this foundation in for my practice?’ Here's exactly what we've built for that.</div>
+    <p class="note">Values are placeholders — confirm before presenting.</p>
+    <table class="stack">
+      <tr><th>Component</th><th style="text-align:right;">Value</th></tr>
+      <tr><td>1. AI &amp; Cloud Security Risk Assessment (HIPAA 5-gap analysis)</td><td class="v">$2,500</td></tr>
+      <tr><td>2. Custom Secure Adoption Roadmap (prioritized, phased)</td><td class="v">$1,500</td></tr>
+      <tr><td>3. Vendor &amp; BAA review + data-governance setup</td><td class="v">$2,000</td></tr>
+      <tr><td>4. Access controls, MFA &amp; logging configuration</td><td class="v">$2,000</td></tr>
+      <tr><td>5. Staff security-awareness training session</td><td class="v">$1,000</td></tr>
+      <tr><td>6. 30-day implementation support + quarterly reviews</td><td class="v">$1,800</td></tr>
+      <tr class="bonus"><td>BONUS: Incident-response playbook + backup/DR validation</td><td class="v">$1,200</td></tr>
+      <tr class="total"><td>TOTAL VALUE</td><td class="v">$12,000</td></tr>
+    </table>
+    <div class="say">Add it up and you're looking at twelve thousand dollars of work to take your practice from ‘hoping it's fine’ to a documented, defensible, breach-resistant foundation you can build on for years.</div>
+  </section>
+
+  <!-- 5. CLOSE -->
+  <section class="card">
+    <h2>5. The Close — Price, Urgency, Guarantee</h2>
+    <div class="time">70:00–80:00</div>
+    <p class="purpose"><b>Purpose:</b> Anchor high, drop to the real offer, add urgency/scarcity and a risk-reversal guarantee, then trial-close.</p>
+    <h3 class="sub">Step 1 — Anchor high</h3>
+    <span class="cue">Anchor slide — $12,000 value</span>
+    <div class="say">A full security overhaul from a consulting firm easily runs twelve to twenty-five thousand dollars — and that's before anyone helps you actually adopt a single tool.</div>
+    <h3 class="sub">Step 2 — Reveal the real offer</h3>
+    <span class="cue">Offer slide — the assessment is complimentary for attendees</span>
+    <div class="say">But you're not paying twelve thousand today. For practices on this webinar, we're giving away the first and most important piece — the AI &amp; Cloud Security Risk Assessment, a $2,500 value — completely free. We'll map your five gaps and hand you the roadmap. If you decide to have us implement it, the full engagement is offered at a webinar rate. No pressure to continue — the assessment is yours either way.</div>
+    <h3 class="sub">Step 3 — Urgency &amp; scarcity (must be real)</h3>
+    <span class="cue">Urgency slide — limited assessment slots + deadline</span>
+    <ul>
+      <li><b>Scarcity:</b> “We only take on a limited number of these assessments each month so they're done properly — a handful of slots are left for this cohort.”</li>
+      <li><b>Urgency:</b> “This webinar rate and the free assessment are good through [DATE — set 5–7 days out]. After that it goes back to list price.”</li>
+    </ul>
+    <p class="note">Only use scarcity/urgency that is genuinely true. False scarcity destroys trust — exactly the thing you're selling.</p>
+    <h3 class="sub">Step 4 — Risk-reversal guarantee</h3>
+    <span class="cue">Guarantee slide</span>
+    <div class="say">Here's our promise: if we run your assessment and don't find at least three specific, actionable gaps worth fixing, you owe us nothing and you keep the roadmap anyway. The only risk is staying exactly where you are.</div>
+    <h3 class="sub">Step 5 — Call to action</h3>
+    <span class="cue">CTA slide — QR code / booking link</span>
+    <div class="say">Scan the code or click the link to grab one of the assessment slots right now while we move into questions. Book it, then stick around — I'll answer everything live.</div>
+    <div class="trial"><b>Trial close:</b> “Who's ready to stop guessing and get the map? Book your slot and put a ‘done’ in the chat.”</div>
+  </section>
+
+  <!-- 6. Q&A -->
+  <section class="card">
+    <h2>6. Q&amp;A + Final Close</h2>
+    <div class="time">80:00–90:00</div>
+    <p class="purpose"><b>Purpose:</b> Use real questions to re-handle the three false beliefs, then restate the offer and the deadline one final time.</p>
+    <p>Seeded questions to have ready — each maps back to a secret:</p>
+    <ul>
+      <li>“Is an AI scribe even HIPAA-compliant?” → re-hit Secret #1 (it's the foundation, not the tool).</li>
+      <li>“We're a 6-person practice — is this overkill?” → re-hit Secret #2 (small is an advantage; co-managed).</li>
+      <li>“What does this actually cost ongoing?” → re-hit Secret #3 (predictable monthly vs. $7.42M breach).</li>
+      <li>“What if we already use [cloud EHR]?” → perfect — the assessment tells you if it's configured safely.</li>
+    </ul>
+    <h3 class="sub">Final close</h3>
+    <div class="say">Remember the one thing we started with: the danger was never the AI or the cloud — it's adopting them without a foundation. You can put that foundation in, you don't have to do it alone, and it costs a fraction of a breach. The free assessment slots are limited and the offer closes [DATE]. Scan the code, book your assessment, and let's get your practice adopting the future — safely. Thank you.</div>
+    <span class="cue">Thank-you / contact slide — SafePoint IT, phone, booking link</span>
+  </section>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="printBtn" type="button">🖨️ Print / Save as PDF</button>
+  </div>
+
+  <p class="foot">SafePoint IT · Confidential · safepointit.com · (847) 499-1500</p>
+</div>
+
+<script>
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+</script>
+</body>
+</html>

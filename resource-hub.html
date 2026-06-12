@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafePoint IT — Free Resources for Healthcare Practices</title>
+<style>
+  :root{
+    --navy:#1E2761; --teal:#028090; --accent:#02C39A; --grey:#5A6472;
+    --light:#E8F1F5; --bg:#F4F8FA; --line:#DCE7EE; --dark:#1E293B;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--dark);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Calibri,Arial,sans-serif; line-height:1.55;}
+  .wrap{max-width:1000px; margin:0 auto; padding:0 18px 70px;}
+  .logobar{background:#fff; border-bottom:1px solid var(--line); padding:14px 18px;}
+  .logobar .inner{max-width:1000px; margin:0 auto;}
+  .logobar img{height:46px; width:auto; display:block;}
+  header.hero{background:var(--navy); color:#fff; padding:40px 18px 34px; border-bottom:5px solid var(--accent);}
+  header.hero .inner{max-width:1000px; margin:0 auto;}
+  header.hero .kicker{margin:0 0 8px; letter-spacing:3px; font-size:12px; font-weight:700; color:var(--accent);}
+  header.hero h1{margin:0; font-size:32px; font-weight:800; max-width:680px;}
+  header.hero p{margin:10px 0 0; color:#CADCFC; font-size:17px; max-width:640px;}
+  .sectlabel{margin:30px 0 6px; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--teal); font-weight:700;}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(290px,1fr)); gap:18px; margin-top:10px;}
+  .asset{background:#fff; border:1px solid var(--line); border-radius:12px; padding:0 0 18px;
+    box-shadow:0 1px 3px rgba(30,39,97,.06); display:flex; flex-direction:column; overflow:hidden;}
+  .asset .top{background:linear-gradient(135deg,#1E2761,#0c3b52); color:#fff; padding:16px 18px; position:relative;}
+  .asset .type{font-size:11px; letter-spacing:1.5px; text-transform:uppercase; font-weight:700; color:var(--accent);}
+  .asset .lock{position:absolute; top:14px; right:16px; font-size:13px; color:#CADCFC;}
+  .asset h3{margin:6px 0 0; font-size:18px; font-weight:800; line-height:1.3;}
+  .asset .body{padding:14px 18px 0; flex:1;}
+  .asset .desc{font-size:14px; color:var(--dark); margin:0;}
+  .asset .meta{font-size:12px; color:var(--grey); margin:10px 0 0;}
+  .asset .btn{margin:14px 18px 0; background:var(--teal); color:#fff; border:none; border-radius:8px;
+    padding:11px 16px; font-size:14.5px; font-weight:700; cursor:pointer; font-family:inherit;}
+  .asset .btn:hover{filter:brightness(1.08);}
+  .asset .btn::before{content:"🔒  ";}
+  .foot{text-align:center; color:var(--grey); font-size:13px; margin-top:34px;}
+  .samplebadge{display:inline-block; background:#FFF7E6; border:1px solid #F0DDA8; color:#7A5B00;
+    font-size:12px; font-weight:700; padding:4px 10px; border-radius:999px; margin-top:14px;}
+  /* modal */
+  .overlay{position:fixed; inset:0; background:rgba(15,23,42,.55); display:none; align-items:center;
+    justify-content:center; padding:18px; z-index:50;}
+  .overlay.open{display:flex;}
+  .modal{background:#fff; border-radius:14px; max-width:440px; width:100%; padding:26px 26px 24px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25); position:relative;}
+  .modal .close{position:absolute; top:12px; right:14px; border:none; background:none; font-size:22px;
+    color:var(--grey); cursor:pointer; line-height:1;}
+  .modal .eyebrow{font-size:12px; letter-spacing:1.5px; text-transform:uppercase; font-weight:700; color:var(--teal);}
+  .modal h2{margin:6px 0 4px; font-size:21px; color:var(--navy);}
+  .modal .assetname{font-weight:700; color:var(--dark);}
+  .modal p.sub{margin:6px 0 16px; font-size:14px; color:var(--grey);}
+  .modal label{display:block; font-size:13px; font-weight:600; margin:10px 0 4px;}
+  .modal input{width:100%; padding:10px 12px; font-size:15px; font-family:inherit;
+    border:1px solid #c7d3db; border-radius:8px;}
+  .modal input:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(2,128,144,.15);}
+  .modal .submit{width:100%; margin-top:16px; background:var(--teal); color:#fff; border:none;
+    border-radius:8px; padding:12px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;}
+  .modal .privacy{font-size:11.5px; color:var(--grey); margin-top:10px; text-align:center;}
+  .success{text-align:center; padding:8px 0;}
+  .success .check{width:54px; height:54px; border-radius:50%; background:#DDF3EE; color:var(--teal);
+    font-size:28px; display:flex; align-items:center; justify-content:center; margin:0 auto 12px;}
+  .success h2{color:var(--navy); margin:0 0 6px;}
+  .success p{color:var(--grey); font-size:14px; margin:0 0 16px;}
+  .success a.get{display:inline-block; background:var(--accent); color:#08322a; font-weight:800;
+    text-decoration:none; padding:11px 20px; border-radius:8px;}
+</style>
+</head>
+<body>
+<div class="logobar"><div class="inner"><img src="https://www.safepointit.com/wp-content/uploads/2026/01/SafePoint-Logo-Header.svg" alt="SafePoint IT"></div></div>
+<header class="hero"><div class="inner">
+  <p class="kicker">FREE RESOURCE LIBRARY</p>
+  <h1>Adopt AI &amp; the cloud in your practice — safely.</h1>
+  <p>Practical, no-jargon guides and tools for medical, dental, and specialty practice managers. Grab any of them free.</p>
+  <div class="samplebadge">SAMPLE PAGE — mock assets &amp; capture for demonstration</div>
+</div></header>
+
+<div class="wrap">
+  <div class="sectlabel">Start here</div>
+  <div class="grid">
+
+    <div class="asset">
+      <div class="top"><span class="type">On-Demand Webinar</span><span class="lock">Gated</span>
+        <h3>Adopting AI &amp; Cloud Safely</h3></div>
+      <div class="body">
+        <p class="desc">The full 45-minute session: how to bring AI and cloud tools into your practice without risking a HIPAA breach, a budget blow-up, or downtime.</p>
+        <p class="meta">⏱ 45 min · video</p>
+      </div>
+      <button class="btn" data-asset="Adopting AI &amp; Cloud Safely (On-Demand Webinar)">Watch free</button>
+    </div>
+
+    <div class="asset">
+      <div class="top"><span class="type">Free Assessment</span><span class="lock">Gated</span>
+        <h3>AI &amp; Cloud Security Risk Assessment</h3></div>
+      <div class="body">
+        <p class="desc">Book your complimentary 5-gap review. We map where your practice stands and hand you a prioritized roadmap — no obligation.</p>
+        <p class="meta">🗓 $2,500 value · free for practices</p>
+      </div>
+      <button class="btn" data-asset="AI &amp; Cloud Security Risk Assessment">Claim my assessment</button>
+    </div>
+
+    <div class="asset">
+      <div class="top"><span class="type">Interactive Tool</span><span class="lock">Gated</span>
+        <h3>5-Gap Security Self-Check</h3></div>
+      <div class="body">
+        <p class="desc">Score your practice across the five gaps that decide whether AI &amp; cloud tools are safe to adopt — BAAs, data flow, access, visibility, ownership — and get an instant readiness rating.</p>
+        <p class="meta">🧮 interactive · ~10 min</p>
+      </div>
+      <button class="btn" data-asset="5-Gap Security Self-Check">Start the self-check</button>
+    </div>
+
+  </div>
+
+  <p class="foot">SafePoint IT · safepointit.com · (847) 499-1500</p>
+</div>
+
+<!-- GATE MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="close" id="closeBtn" aria-label="Close">&times;</button>
+    <div id="gateForm">
+      <div class="eyebrow">Free instant access</div>
+      <h2>Get: <span class="assetname" id="assetName">this resource</span></h2>
+      <p class="sub">Tell us where to send it and it's yours.</p>
+      <label>First name</label><input type="text" id="f_name" placeholder="First name">
+      <label>Work email</label><input type="email" id="f_email" placeholder="you@yourpractice.com">
+      <label>Practice name <span style="color:#9aa6b2;font-weight:400;">(optional)</span></label><input type="text" id="f_practice" placeholder="Your practice">
+      <button class="submit" id="submitBtn">Send me access</button>
+      <p class="privacy">We respect your inbox. Unsubscribe anytime. No spam, ever.</p>
+    </div>
+    <div class="success" id="successView" style="display:none;">
+      <div class="check">✓</div>
+      <h2>You're in!</h2>
+      <p>We've sent <span class="assetname" id="successAsset">your resource</span> to your inbox. You can also open it now:</p>
+      <a class="get" href="#" id="getLink">Open the resource</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Server-side delivery endpoint (set by ops; routes to the internal inbox server-side).
+  // Never put an internal email address in this file — page source is public.
+  var SUBMIT_ENDPOINT = ""; // e.g. a HubSpot Forms / Formspree / WP REST URL
+
+  var overlay = document.getElementById("overlay");
+  var currentAsset = "this resource";
+
+  function openGate(name){
+    currentAsset = name;
+    document.getElementById("assetName").innerHTML = name;
+    document.getElementById("gateForm").style.display = "block";
+    document.getElementById("successView").style.display = "none";
+    document.getElementById("submitBtn").disabled = false;
+    document.getElementById("submitBtn").textContent = "Send me access";
+    overlay.classList.add("open");
+  }
+  function closeGate(){ overlay.classList.remove("open"); }
+
+  document.querySelectorAll(".asset .btn").forEach(function(b){
+    b.addEventListener("click", function(){ openGate(b.getAttribute("data-asset")); });
+  });
+  document.getElementById("closeBtn").addEventListener("click", closeGate);
+  overlay.addEventListener("click", function(e){ if(e.target === overlay) closeGate(); });
+
+  document.getElementById("submitBtn").addEventListener("click", function(){
+    var email = document.getElementById("f_email").value.trim();
+    if(!email || email.indexOf("@") < 1){ alert("Please enter a valid work email."); return; }
+    var payload = {
+      asset: currentAsset.replace(/&amp;/g,"&"),
+      first_name: document.getElementById("f_name").value.trim(),
+      email: email,
+      practice: document.getElementById("f_practice").value.trim(),
+      submitted: new Date().toISOString()
+    };
+    function showSuccess(){
+      document.getElementById("successAsset").innerHTML = currentAsset;
+      document.getElementById("gateForm").style.display = "none";
+      document.getElementById("successView").style.display = "block";
+    }
+    if(!SUBMIT_ENDPOINT){ showSuccess(); return; } // sample/demo: unlock without backend
+    var btn = this; btn.disabled = true; btn.textContent = "Sending…";
+    fetch(SUBMIT_ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)})
+      .then(function(r){ if(!r.ok) throw 0; showSuccess(); })
+      .catch(function(){ btn.disabled=false; btn.textContent="Send me access"; alert("Something went wrong. Please try again."); });
+  });
+</script>
+</body>
+</html>

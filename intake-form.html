@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafePoint IT — AI &amp; Cloud Security Readiness Intake</title>
+<style>
+  :root{
+    --navy:#1E2761; --teal:#028090; --accent:#02C39A; --grey:#5A6472;
+    --light:#E8F1F5; --bg:#F4F8FA; --line:#DCE7EE; --dark:#1E293B;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--dark);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Calibri,Arial,sans-serif;
+    line-height:1.5;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:0 18px 60px;}
+  .logobar{background:#fff; border-bottom:1px solid var(--line); padding:14px 18px;}
+  .logobar .inner{max-width:860px; margin:0 auto;}
+  .logobar img{height:46px; width:auto; display:block;}
+  header.hero{
+    background:var(--navy); color:#fff; padding:38px 18px 30px;
+    border-bottom:5px solid var(--accent);
+  }
+  header.hero .inner{max-width:860px; margin:0 auto;}
+  .kicker{letter-spacing:3px; font-size:13px; font-weight:700; color:var(--accent); margin:0 0 8px;}
+  header.hero h1{margin:0; font-size:30px; font-weight:800;}
+  header.hero p{margin:8px 0 0; color:#CADCFC; font-size:16px;}
+  .intro{
+    background:#fff; border:1px solid var(--line); border-left:5px solid var(--accent);
+    border-radius:8px; padding:16px 18px; margin:24px 0; font-size:15px; color:#333;
+  }
+  .intro strong{color:var(--teal);}
+  section.card{
+    background:#fff; border:1px solid var(--line); border-radius:10px;
+    padding:22px 22px 6px; margin:18px 0; box-shadow:0 1px 3px rgba(30,39,97,.06);
+  }
+  section.card h2{
+    margin:0 0 4px; font-size:20px; color:var(--navy);
+  }
+  section.card .sub{margin:0 0 16px; color:var(--grey); font-size:14px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-weight:600; font-size:15px; margin-bottom:6px; color:var(--dark);}
+  .field input[type=text], .field input[type=email], .field textarea{
+    width:100%; padding:10px 12px; font-size:15px; font-family:inherit;
+    border:1px solid #c7d3db; border-radius:7px; background:#fff; color:var(--dark);
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .field input:focus, .field textarea:focus{
+    outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(2,128,144,.15);
+  }
+  .field textarea{min-height:72px; resize:vertical;}
+  .row{display:flex; gap:16px; flex-wrap:wrap;}
+  .row .field{flex:1 1 240px;}
+  .gap-title{
+    display:flex; align-items:center; gap:10px; margin:22px 0 10px;
+    font-weight:700; color:var(--teal); font-size:16px;
+  }
+  .gap-title .n{
+    flex:none; width:26px; height:26px; border-radius:50%; background:var(--teal);
+    color:#fff; font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center;
+  }
+  .choices{display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;}
+  .choices label{
+    flex:1 1 90px; text-align:center; cursor:pointer; font-weight:600; font-size:14px;
+    border:1px solid #c7d3db; border-radius:7px; padding:9px 6px; color:var(--grey);
+    background:#fff; transition:all .12s; user-select:none;
+  }
+  .choices input{position:absolute; opacity:0; width:0; height:0;}
+  .choices input:checked + span{}
+  .choices label:hover{border-color:var(--teal);}
+  .choices label.sel{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .actions{
+    position:sticky; bottom:0; background:rgba(244,248,250,.96); backdrop-filter:blur(4px);
+    border-top:1px solid var(--line); padding:14px 0; margin-top:8px;
+    display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+  }
+  .btn{
+    border:none; border-radius:8px; padding:12px 20px; font-size:15px; font-weight:700;
+    cursor:pointer; font-family:inherit; transition:transform .05s, filter .15s;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--teal); color:#fff;}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-secondary{background:#fff; color:var(--navy); border:1px solid #c7d3db;}
+  .btn-secondary:hover{border-color:var(--teal);}
+  .foot{text-align:center; color:var(--grey); font-size:13px; margin-top:26px;}
+  .note{font-size:13px; color:var(--grey); margin:2px 0 0;}
+  @media print{
+    .actions{display:none;} header.hero{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    body{background:#fff;} section.card{box-shadow:none; break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="logobar"><div class="inner"><img src="https://www.safepointit.com/wp-content/uploads/2026/01/SafePoint-Logo-Header.svg" alt="SafePoint IT"></div></div>
+<header class="hero">
+  <div class="inner">
+    <h1>AI &amp; Cloud Security Readiness</h1>
+    <p>Pre-Assessment Intake Questionnaire</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="intro">
+    Thank you for booking your AI &amp; Cloud Security Risk Assessment. Completing this short questionnaire
+    before your session lets us tailor the review to your practice. There are no wrong answers —
+    <strong>“we’re not sure” is a completely valid response</strong> and is useful for us to know.
+    <p class="note">Estimated time: 10–15 minutes. When you’re done, use the buttons at the bottom to send your responses to SafePoint, download a copy, or print to PDF.</p>
+  </div>
+
+  <form id="intakeForm">
+
+  <!-- SECTION 1 -->
+  <section class="card">
+    <h2>Section 1 — Practice profile</h2>
+    <p class="sub">A few basics about your organization.</p>
+    <div class="field"><label>Practice / organization name</label><input type="text" name="Practice name"></div>
+    <div class="row">
+      <div class="field"><label>Practice type (medical, dental, specialty)</label><input type="text" name="Practice type"></div>
+      <div class="field"><label>EHR / practice-management system</label><input type="text" name="EHR / PM system"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>Number of staff (clinical + admin)</label><input type="text" name="Number of staff"></div>
+      <div class="field"><label>Number of locations</label><input type="text" name="Number of locations"></div>
+    </div>
+    <div class="field"><label>Primary contact — name, role, email &amp; phone</label><textarea name="Primary contact"></textarea></div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="card">
+    <h2>Section 2 — Current IT &amp; security setup</h2>
+    <p class="sub">How technology is supported today.</p>
+    <div class="field"><label>Do you have in-house IT staff? If so, what is their role?</label><textarea name="In-house IT"></textarea></div>
+    <div class="field"><label>Do you currently work with an outside IT provider / MSP?</label><textarea name="Current MSP"></textarea></div>
+    <div class="field"><label>What prompted your interest in this assessment?</label><textarea name="What prompted interest"></textarea></div>
+    <div class="field"><label>Have you had a security incident, scare, or near-miss in the last 24 months?</label><textarea name="Past incident"></textarea></div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="card">
+    <h2>Section 3 — Tools &amp; technology in use</h2>
+    <p class="sub">Include anything a staff member signed up for, even informally.</p>
+    <div class="field"><label>Cloud applications in use (email, file storage, billing, etc.)</label><textarea name="Cloud apps"></textarea></div>
+    <div class="field"><label>AI tools in use or under consideration (AI scribes, chatbots, transcription, scheduling AI)</label><textarea name="AI tools"></textarea></div>
+    <div class="field"><label>Patient portal and/or telehealth platform</label><textarea name="Portal / telehealth"></textarea></div>
+    <div class="field"><label>Which AI or cloud tools would you like to adopt next?</label><textarea name="Tools to adopt next"></textarea></div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="card">
+    <h2>Section 4 — The five-gap snapshot</h2>
+    <p class="sub">A quick best-guess answer is all we need — we’ll verify the details during the assessment.</p>
+
+    <div class="gap-title"><span class="n">1</span> Business Associate Agreements (BAA)</div>
+    <div class="field"><label>Which vendors or tools handle patient data (PHI) on your behalf?</label><textarea name="BAA - vendors handling PHI"></textarea></div>
+    <div class="field"><label>Do you have signed BAAs with each of them?</label><div class="choices" data-name="BAA - signed BAAs"></div></div>
+
+    <div class="gap-title"><span class="n">2</span> Data flow</div>
+    <div class="field"><label>Do you know where your patient data is stored and processed?</label><div class="choices" data-name="Data flow - know where stored"></div></div>
+    <div class="field"><label>Are you aware whether any AI tool uses your data to train its model?</label><div class="choices" data-name="Data flow - AI training awareness"></div></div>
+
+    <div class="gap-title"><span class="n">3</span> Access control</div>
+    <div class="field"><label>Is multi-factor authentication (MFA) required on key systems?</label><div class="choices" data-name="Access - MFA required"></div></div>
+    <div class="field"><label>Is system access removed promptly when a staff member leaves?</label><div class="choices" data-name="Access - offboarding"></div></div>
+
+    <div class="gap-title"><span class="n">4</span> Visibility &amp; monitoring</div>
+    <div class="field"><label>Are system logins and data access logged or monitored?</label><div class="choices" data-name="Visibility - logging"></div></div>
+    <div class="field"><label>Would you be able to tell if patient data had been accessed improperly?</label><div class="choices" data-name="Visibility - detect misuse"></div></div>
+
+    <div class="gap-title"><span class="n">5</span> Ownership &amp; governance</div>
+    <div class="field"><label>Who decides whether a new tool can be adopted in your practice?</label><textarea name="Ownership - tool approval"></textarea></div>
+    <div class="field"><label>Who is responsible for security and compliance today?</label><textarea name="Ownership - security owner"></textarea></div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section class="card">
+    <h2>Section 5 — Goals &amp; concerns</h2>
+    <p class="sub">Help us aim the session at what matters to you.</p>
+    <div class="field"><label>What are your biggest concerns about adopting AI or cloud tools?</label><textarea name="Concerns"></textarea></div>
+    <div class="field"><label>What would a successful outcome from this assessment look like for you?</label><textarea name="Success outcome"></textarea></div>
+    <div class="field"><label>Anything else we should know before we begin?</label><textarea name="Anything else"></textarea></div>
+  </section>
+
+  </form>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="submitBtn" type="button">Submit to SafePoint</button>
+    <button class="btn btn-secondary" id="downloadBtn" type="button">⬇️ Download a copy</button>
+    <button class="btn btn-secondary" id="printBtn" type="button">🖨️ Print / Save as PDF</button>
+  </div>
+  <div id="thanks" style="display:none; text-align:center; margin-top:16px; padding:16px; background:#fff; border:1px solid var(--line); border-left:5px solid var(--accent); border-radius:8px; color:var(--teal); font-weight:700;">Thank you — your responses have been sent to the SafePoint team. We’ll be in touch to confirm your assessment.</div>
+
+  <p class="foot">SafePoint IT · Confidential · safepointit.com · (847) 499-1500</p>
+</div>
+
+<script>
+  // ===== CONFIG (server-side delivery only) =====
+  // Point this at a form-handler URL (e.g., a Formspree / HubSpot Forms / WordPress
+  // REST endpoint). That handler is what routes submissions to your INTERNAL inbox,
+  // server-side. NEVER put an internal email address in this file — page source is
+  // public to anyone who opens it.
+  var SUBMIT_ENDPOINT = ""; // e.g. "https://formspree.io/f/xxxxxxx"
+
+  var CHOICE_OPTIONS = ["Yes", "No", "Unsure"];
+
+  // Build Yes/No/Unsure toggle groups
+  document.querySelectorAll(".choices").forEach(function(group){
+    var name = group.getAttribute("data-name");
+    CHOICE_OPTIONS.forEach(function(opt){
+      var label = document.createElement("label");
+      var input = document.createElement("input");
+      input.type = "radio"; input.name = name; input.value = opt;
+      var span = document.createElement("span"); span.textContent = opt;
+      label.appendChild(input); label.appendChild(span);
+      label.addEventListener("click", function(){
+        group.querySelectorAll("label").forEach(function(l){ l.classList.remove("sel"); });
+        label.classList.add("sel");
+      });
+      group.appendChild(label);
+    });
+  });
+
+  function collectResponses(){
+    var lines = [];
+    lines.push("SAFEPOINT IT — AI & CLOUD SECURITY READINESS INTAKE");
+    lines.push("Submitted: " + new Date().toLocaleString());
+    lines.push("");
+    document.querySelectorAll("section.card").forEach(function(card){
+      var heading = card.querySelector("h2").textContent.trim();
+      lines.push("== " + heading + " ==");
+      card.querySelectorAll(".field").forEach(function(field){
+        var labelEl = field.querySelector("label");
+        if(!labelEl) return;
+        var label = labelEl.textContent.trim();
+        var input = field.querySelector("input[type=text], input[type=email], textarea");
+        var choices = field.querySelector(".choices");
+        var value = "";
+        if(input){ value = input.value.trim(); }
+        else if(choices){
+          var checked = choices.querySelector("input:checked");
+          value = checked ? checked.value : "";
+        }
+        lines.push(label + "\n   > " + (value || "(blank)"));
+      });
+      lines.push("");
+    });
+    return lines.join("\n");
+  }
+
+  document.getElementById("downloadBtn").addEventListener("click", function(){
+    var text = collectResponses();
+    var blob = new Blob([text], {type:"text/plain"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    var nameField = document.querySelector('input[name="Practice name"]');
+    var who = nameField && nameField.value.trim() ? nameField.value.trim().replace(/[^a-z0-9]+/gi,"_") : "Intake";
+    a.href = url; a.download = "SafePoint_Intake_" + who + ".txt";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById("submitBtn").addEventListener("click", function(){
+    var text = collectResponses();
+    var nameField = document.querySelector('input[name="Practice name"]');
+    var who = nameField && nameField.value.trim() ? nameField.value.trim() : "New practice";
+    if(!SUBMIT_ENDPOINT){
+      alert("Online submission isn't switched on yet. For now, please click “Download a copy” and send the file to your SafePoint contact.");
+      return;
+    }
+    var btn = this; btn.disabled = true; btn.textContent = "Sending…";
+    fetch(SUBMIT_ENDPOINT, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ practice: who, submitted: new Date().toISOString(), responses: text })
+    }).then(function(r){
+      if(!r.ok) throw new Error("bad response");
+      document.getElementById("intakeForm").style.display = "none";
+      document.querySelector(".actions").style.display = "none";
+      document.getElementById("thanks").style.display = "block";
+      document.getElementById("thanks").scrollIntoView({behavior:"smooth"});
+    }).catch(function(){
+      btn.disabled = false; btn.textContent = "Submit to SafePoint";
+      alert("Sorry — something went wrong sending your responses. Please try again, or use “Download a copy.”");
+    });
+  });
+
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+</script>
+</body>
+</html>

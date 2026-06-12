@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Managed IT & Security for Healthcare Practices — SafePoint IT</title>
+<style>
+  :root{
+    --navy:#1E2761; --teal:#028090; --accent:#02C39A; --grey:#5A6472;
+    --light:#E8F1F5; --bg:#F4F8FA; --line:#DCE7EE; --dark:#1E293B; --high:#B85042;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--dark);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Calibri,Arial,sans-serif; line-height:1.55;}
+  .inner{max-width:1080px; margin:0 auto; padding:0 20px;}
+  .topbar{background:#fff; border-bottom:1px solid var(--line); padding:11px 0; position:sticky; top:0; z-index:20;}
+  .topbar .inner{display:flex; align-items:center; justify-content:space-between; gap:12px;}
+  .topbar img{height:40px;}
+  .topbar .right{display:flex; align-items:center; gap:16px;}
+  .topbar .ph{font-weight:700; color:var(--navy); font-size:15px; text-decoration:none;}
+  .btn{display:inline-block; background:var(--accent); color:#06312a; font-weight:800; text-decoration:none;
+    border:none; border-radius:9px; padding:11px 18px; font-size:14.5px; cursor:pointer; font-family:inherit;}
+  .btn:hover{filter:brightness(1.05);}
+  .btn.lg{padding:15px 28px; font-size:16.5px;}
+  /* hero */
+  .hero{background:linear-gradient(160deg,#1E2761,#122047 60%,#0c3b52); color:#fff; padding:52px 0 58px;}
+  .hero .eyebrow{letter-spacing:2px; font-size:12px; font-weight:700; color:var(--accent); margin:0 0 12px;}
+  .hero h1{font-size:40px; line-height:1.13; margin:0 0 14px; font-weight:800; max-width:780px;}
+  .hero h1 .hl{color:var(--accent);}
+  .hero .sub{font-size:19px; color:#CADCFC; margin:0 0 24px; max-width:620px;}
+  .hero .row{display:flex; gap:14px; flex-wrap:wrap; align-items:center;}
+  .hero .assurance{font-size:13px; color:#9FB3D9; margin-top:18px;}
+  .badges{display:flex; gap:22px; flex-wrap:wrap; margin-top:26px; padding-top:20px; border-top:1px solid rgba(255,255,255,.15);}
+  .badges div{font-size:13px; color:#CADCFC;} .badges b{display:block; font-size:22px; color:#fff; font-weight:800;}
+  .samplebadge{display:inline-block; background:#FFF7E6; color:#7A5B00; border:1px solid #F0DDA8;
+    font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:999px; margin-bottom:16px;}
+  section.band{padding:50px 0;} section.band.alt{background:#fff;}
+  .sectlabel{text-align:center; letter-spacing:2px; font-size:12px; font-weight:800; color:var(--teal); margin:0 0 6px;}
+  .secth{text-align:center; font-size:29px; color:var(--navy); margin:0 0 10px; font-weight:800;}
+  .secsub{text-align:center; color:var(--grey); max-width:640px; margin:0 auto 30px; font-size:16px;}
+  /* problem */
+  .pains{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; max-width:820px; margin:0 auto;}
+  .pain{background:var(--bg); border:1px solid var(--line); border-left:4px solid var(--high); border-radius:10px; padding:14px 16px; font-size:14.5px;}
+  /* services grid (what you get) */
+  .svcgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .svc{background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px; box-shadow:0 1px 3px rgba(30,39,97,.06);}
+  .svc .ic{width:42px; height:42px; border-radius:10px; background:var(--light); color:var(--teal);
+    display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:10px;}
+  .svc h3{margin:0 0 6px; font-size:16.5px; color:var(--navy);}
+  .svc p{margin:0; font-size:14px; color:var(--dark);}
+  /* steps */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .step{background:#fff; border:1px solid var(--line); border-radius:12px; padding:22px; text-align:left;}
+  .step .num{width:34px; height:34px; border-radius:50%; background:var(--teal); color:#fff; font-weight:800;
+    display:flex; align-items:center; justify-content:center; margin-bottom:10px;}
+  .step h3{margin:0 0 6px; font-size:17px; color:var(--navy);} .step p{margin:0; font-size:14px;}
+  /* why */
+  .why{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; text-align:center;}
+  .why .n{font-size:30px; font-weight:800; color:var(--navy);} .why .l{font-size:13.5px; color:var(--grey); margin-top:4px;}
+  .partners{text-align:center; color:var(--grey); font-size:13px; margin-top:26px;}
+  .partners b{color:var(--dark);}
+  /* quotes */
+  .quotes{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .quote{background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:20px;}
+  .quote .stars{color:#E0A526; margin-bottom:8px;} .quote p{margin:0 0 10px; font-style:italic; font-size:14px;}
+  .quote .who{font-weight:700; color:var(--grey); font-size:13px;}
+  /* offer / booking */
+  .offer{background:var(--navy); color:#fff; border-radius:16px; padding:34px; display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:center;}
+  .offer h2{margin:0 0 10px; font-size:26px;} .offer ul{padding-left:18px; margin:0; color:#CADCFC;} .offer li{margin:7px 0;}
+  .offer .guarantee{margin-top:16px; font-size:13.5px; color:#9FB3D9;}
+  .bookcard{background:#fff; color:var(--dark); border-radius:14px; padding:22px;}
+  .bookcard h3{margin:0 0 4px; font-size:19px; color:var(--navy);} .bookcard .bsub{margin:0 0 14px; font-size:13.5px; color:var(--grey);}
+  .bookcard label{display:block; font-size:13px; font-weight:600; margin:9px 0 4px;}
+  .bookcard input{width:100%; padding:10px 12px; font-size:15px; font-family:inherit; border:1px solid #c7d3db; border-radius:8px;}
+  .bookcard input:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(2,128,144,.15);}
+  .bookcard .cta{width:100%; margin-top:14px; background:var(--accent); color:#06312a; border:none; border-radius:9px; padding:14px; font-size:16px; font-weight:800; cursor:pointer; font-family:inherit;}
+  .bookcard .micro{text-align:center; font-size:11.5px; color:var(--grey); margin-top:9px;}
+  /* faq */
+  .faq{max-width:760px; margin:0 auto;}
+  .faq details{background:#fff; border:1px solid var(--line); border-radius:10px; padding:4px 16px; margin-bottom:10px;}
+  .faq summary{cursor:pointer; font-weight:700; color:var(--navy); padding:12px 0; font-size:15.5px;}
+  .faq p{margin:0 0 14px; font-size:14.5px; color:var(--dark);}
+  .finalcta{text-align:center;}
+  .foot{background:#0e1330; color:#9FB3D9; text-align:center; padding:24px 0; font-size:13px;}
+  @media (max-width:820px){
+    .hero h1{font-size:30px;} .svcgrid,.steps,.quotes,.why{grid-template-columns:1fr;} .pains{grid-template-columns:1fr;}
+    .offer{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <img src="https://www.safepointit.com/wp-content/uploads/2026/01/SafePoint-Logo-Header.svg" alt="SafePoint IT">
+  <div class="right"><a class="ph" href="tel:8474991500">(847) 499-1500</a><a class="btn" href="#book">Book free assessment</a></div>
+</div></div>
+
+<!-- HERO -->
+<div class="hero"><div class="inner">
+  <span class="samplebadge">SAMPLE SALES PAGE — mock booking for demonstration</span>
+  <p class="eyebrow">MANAGED IT &amp; SECURITY FOR HEALTHCARE PRACTICES</p>
+  <h1>Stop chasing your IT provider. <span class="hl">Get fully managed IT &amp; security</span> built for medical &amp; dental practices.</h1>
+  <p class="sub">SafePoint IT keeps your practice secure, HIPAA-ready, and running — with fast support, predictable flat-fee billing, and the foundation to adopt AI &amp; cloud tools safely.</p>
+  <div class="row">
+    <a class="btn lg" href="#book">Book your free assessment →</a>
+    <a class="ph" href="tel:8474991500" style="color:#CADCFC;">or call (847) 499-1500</a>
+  </div>
+  <p class="assurance">No obligation · No long sales pitch · You keep the roadmap either way</p>
+  <div class="badges">
+    <div><b>Since 2002</b>20+ years in business</div>
+    <div><b>15–30 min</b>emergency response target</div>
+    <div><b>Chicago + Palatine</b>local, on-site &amp; remote</div>
+    <div><b>HIPAA-focused</b>built for practices</div>
+  </div>
+</div></div>
+
+<!-- PROBLEM (PAS) -->
+<section class="band"><div class="inner">
+  <p class="sectlabel">SOUND FAMILIAR?</p>
+  <h2 class="secth">If your IT feels like this, you're not alone</h2>
+  <div class="pains">
+    <div class="pain">You're the “accidental IT person” on top of running the practice.</div>
+    <div class="pain">Support tickets sit for hours (or days) while patients wait.</div>
+    <div class="pain">Surprise invoices make IT impossible to budget.</div>
+    <div class="pain">You worry a HIPAA breach could happen on your watch.</div>
+    <div class="pain">Everyone wants AI tools, but no one's sure what's safe.</div>
+    <div class="pain">Your current provider is reactive — never proactive.</div>
+  </div>
+</div></section>
+
+<!-- WHAT YOU GET (clarity on the service) -->
+<section class="band alt"><div class="inner">
+  <p class="sectlabel">WHAT YOU GET</p>
+  <h2 class="secth">One partner for your entire technology stack</h2>
+  <p class="secsub">Managed IT &amp; security delivered for a predictable monthly fee — so you can stop firefighting and focus on patients.</p>
+  <div class="svcgrid">
+    <div class="svc"><div class="ic">🎧</div><h3>24/7 Help Desk</h3><p>Fast, friendly support for every staff member — remote and on-site — with response targets you can count on.</p></div>
+    <div class="svc"><div class="ic">🛡️</div><h3>Cybersecurity &amp; HIPAA Compliance</h3><p>Encryption, MFA, threat detection, risk assessments, and the controls that keep patient data protected.</p></div>
+    <div class="svc"><div class="ic">📡</div><h3>Proactive Monitoring</h3><p>We watch and maintain your systems around the clock to prevent issues before they cause downtime.</p></div>
+    <div class="svc"><div class="ic">☁️</div><h3>Microsoft 365 &amp; Cloud</h3><p>Management of your email, files, and cloud — secure, reliable, and set up to scale with your practice.</p></div>
+    <div class="svc"><div class="ic">💾</div><h3>Backup &amp; Disaster Recovery</h3><p>Validated backups and a recovery plan so your practice keeps running even when something goes wrong.</p></div>
+    <div class="svc"><div class="ic">🧭</div><h3>Strategic IT Advisory</h3><p>A roadmap and budget plan — including how to adopt AI &amp; cloud tools safely — from a partner who plans ahead.</p></div>
+  </div>
+</div></section>
+
+<!-- HOW IT WORKS -->
+<section class="band"><div class="inner">
+  <p class="sectlabel">HOW IT WORKS</p>
+  <h2 class="secth">Getting started is simple</h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h3>Free assessment</h3><p>We review your setup across our 5-gap security framework and hand you a prioritized roadmap — no cost, no obligation.</p></div>
+    <div class="step"><div class="num">2</div><h3>Onboarding &amp; foundation</h3><p>We put the secure foundation in place and take IT off your plate, with a clear plan and predictable pricing.</p></div>
+    <div class="step"><div class="num">3</div><h3>Ongoing managed security</h3><p>Fast support, proactive monitoring, and quarterly reviews — so you can adopt new tools with confidence.</p></div>
+  </div>
+</div></section>
+
+<!-- WHY SAFEPOINT -->
+<section class="band alt"><div class="inner">
+  <p class="sectlabel">WHY SAFEPOINT IT</p>
+  <h2 class="secth">A local partner practices actually trust</h2>
+  <div class="why">
+    <div><div class="n">20+ yrs</div><div class="l">serving Chicagoland businesses since 2002</div></div>
+    <div><div class="n">1–4 hrs</div><div class="l">typical non-urgent response (15–30 min for emergencies)</div></div>
+    <div><div class="n">Flat fee</div><div class="l">predictable monthly billing — no surprise invoices</div></div>
+    <div><div class="n">Healthcare</div><div class="l">HIPAA, EHR, and practice-specific expertise</div></div>
+  </div>
+  <p class="partners">We work with the platforms you rely on: <b>Microsoft 365 &amp; Azure · AWS · Sophos · Duo · VMware · Dell · Lenovo</b></p>
+</div></section>
+
+<!-- PROOF -->
+<section class="band"><div class="inner">
+  <p class="sectlabel">WHAT PRACTICES SAY</p>
+  <h2 class="secth">Trusted by Chicagoland teams</h2>
+  <div class="quotes">
+    <div class="quote"><div class="stars">★★★★★</div><p>“Over 7 years with them — what I love most is how quick they are to respond and resolve issues. Extremely professional and knowledgeable.”</p><div class="who">— Krystina B.</div></div>
+    <div class="quote"><div class="stars">★★★★★</div><p>“Quick response times and the entire support staff are always helpful and courteous. They get us back online fast.”</p><div class="who">— Tyler Z.</div></div>
+    <div class="quote"><div class="stars">★★★★★</div><p>“Their combined knowledge and expertise are robust, and their customer service team is outstanding — extremely responsive and professional.”</p><div class="who">— David S.</div></div>
+  </div>
+</div></section>
+
+<!-- OFFER + BOOKING -->
+<section class="band alt" id="book"><div class="inner">
+  <div class="offer">
+    <div>
+      <h2>Start with a free assessment</h2>
+      <ul>
+        <li>A complete 5-gap security &amp; AI-readiness review of your practice</li>
+        <li>A prioritized, plain-English roadmap you keep — even if we never work together</li>
+        <li>A clear picture of what fully managed IT &amp; security would look like for you</li>
+        <li>No obligation and no high-pressure pitch</li>
+      </ul>
+      <p class="guarantee">Our promise: if we don't surface at least three specific gaps worth fixing, you owe us nothing — and you keep the roadmap. The only risk is staying where you are.</p>
+    </div>
+    <div class="bookcard">
+      <h3>Book your free assessment</h3>
+      <p class="bsub">Tell us a bit about your practice and we'll reach out to confirm a time.</p>
+      <div id="bookForm">
+        <label>Your name</label><input type="text" id="b_name" placeholder="First &amp; last name">
+        <label>Practice name</label><input type="text" id="b_practice" placeholder="Your practice">
+        <label>Work email</label><input type="email" id="b_email" placeholder="you@yourpractice.com">
+        <label>Phone</label><input type="tel" id="b_phone" placeholder="(847) 000-0000">
+        <button class="cta" id="bookBtn">Request my free assessment →</button>
+        <p class="micro">🔒 We'll only use this to schedule your assessment. No spam.</p>
+      </div>
+      <div id="bookSuccess" style="display:none; text-align:center; padding:14px 0;">
+        <div style="font-size:30px;">✅</div>
+        <h3>Request received!</h3>
+        <p class="bsub">Thanks — a SafePoint specialist will reach out shortly to confirm your free assessment. Prefer to talk now? Call (847) 499-1500.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="band"><div class="inner">
+  <p class="sectlabel">QUESTIONS</p>
+  <h2 class="secth">Frequently asked</h2>
+  <div class="faq">
+    <details><summary>How much does managed IT cost?</summary><p>Pricing depends on your number of users, devices, locations, and security needs. SafePoint typically works on a fixed monthly fee so you can budget predictably and avoid surprise repair costs. The free assessment gives you a clear scope before any commitment.</p></details>
+    <details><summary>What's your response time?</summary><p>We use service-level agreements to keep support timely — typically 1–4 hours for non-urgent issues, with emergencies prioritized at a 15–30 minute response target.</p></details>
+    <details><summary>We already have an IT provider. Why switch?</summary><p>Most practices come to us for faster response, stronger security, and proactive planning instead of reactive break-fix. The assessment shows you exactly where your current setup stands — no pressure to change.</p></details>
+    <details><summary>What's included in managed IT services?</summary><p>Help desk support, proactive monitoring, cybersecurity and HIPAA compliance, Microsoft 365 &amp; cloud management, backup and disaster recovery, and strategic IT planning — tailored to your practice.</p></details>
+    <details><summary>Where is SafePoint located?</summary><p>We serve the greater Chicago area with locations in downtown Chicago and Palatine, providing both local on-site and remote support.</p></details>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section class="band alt"><div class="inner finalcta">
+  <h2 class="secth">Ready for IT that just works?</h2>
+  <p class="secsub">See where your practice stands and what fully managed IT &amp; security would look like — free.</p>
+  <a class="btn lg" href="#book">Book your free assessment →</a>
+</div></section>
+
+<div class="foot"><div class="inner">SafePoint IT · safepointit.com · (847) 499-1500 · Chicago &amp; Palatine, IL</div></div>
+
+<script>
+  var SUBMIT_ENDPOINT = ""; // server-side handler (routes to internal inbox); never put an internal email here
+
+  document.getElementById("bookBtn").addEventListener("click", function(){
+    var email = document.getElementById("b_email").value.trim();
+    var name = document.getElementById("b_name").value.trim();
+    if(!name){ alert("Please enter your name."); return; }
+    if(!email || email.indexOf("@") < 1){ alert("Please enter a valid work email."); return; }
+    var payload = {
+      name: name,
+      practice: document.getElementById("b_practice").value.trim(),
+      email: email,
+      phone: document.getElementById("b_phone").value.trim(),
+      request: "Free assessment",
+      submitted: new Date().toISOString()
+    };
+    function success(){
+      document.getElementById("bookForm").style.display = "none";
+      document.getElementById("bookSuccess").style.display = "block";
+    }
+    if(!SUBMIT_ENDPOINT){ success(); return; }
+    var btn = this; btn.disabled = true; btn.textContent = "Sending…";
+    fetch(SUBMIT_ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)})
+      .then(function(r){ if(!r.ok) throw 0; success(); })
+      .catch(function(){ btn.disabled=false; btn.textContent="Request my free assessment →"; alert("Something went wrong — please try again or call us."); });
+  });
+</script>
+</body>
+</html>

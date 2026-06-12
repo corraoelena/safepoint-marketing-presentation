@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafePoint IT — AI &amp; Cloud Security 5-Gap Scorecard</title>
+<style>
+  :root{
+    --navy:#1E2761; --teal:#028090; --accent:#02C39A; --grey:#5A6472;
+    --light:#E8F1F5; --bg:#F4F8FA; --line:#DCE7EE; --dark:#1E293B;
+    --high:#B85042; --mod:#B07A00; --low:#028090;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--dark);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Calibri,Arial,sans-serif; line-height:1.5;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 18px 70px;}
+  .logobar{background:#fff; border-bottom:1px solid var(--line); padding:14px 18px;}
+  .logobar .inner{max-width:920px; margin:0 auto;}
+  .logobar img{height:46px; width:auto; display:block;}
+  header.hero{background:var(--navy); color:#fff; padding:34px 18px 28px; border-bottom:5px solid var(--accent);}
+  header.hero .inner{max-width:920px; margin:0 auto;}
+  header.hero h1{margin:0; font-size:28px; font-weight:800;}
+  header.hero p{margin:8px 0 0; color:#CADCFC; font-size:16px;}
+  .intro{background:#fff; border:1px solid var(--line); border-left:5px solid var(--accent);
+    border-radius:8px; padding:16px 18px; margin:22px 0; font-size:15px; color:#333;}
+  section.card{background:#fff; border:1px solid var(--line); border-radius:10px;
+    padding:20px 22px; margin:18px 0; box-shadow:0 1px 3px rgba(30,39,97,.06);}
+  section.card h2{margin:0; font-size:20px; color:var(--navy);}
+  section.card .sub{margin:6px 0 14px; color:var(--grey); font-size:14px;}
+  /* overall banner */
+  .overall{display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    background:var(--navy); color:#fff; border-radius:10px; padding:20px 24px; margin:18px 0;}
+  .overall .num{font-size:46px; font-weight:800; line-height:1; color:var(--accent); min-width:120px;}
+  .overall .lbl{font-size:13px; letter-spacing:2px; color:#CADCFC; font-weight:700;}
+  .overall .meta{flex:1 1 240px;}
+  .overall .meta p{margin:4px 0 0; color:#CADCFC; font-size:14px;}
+  /* scale table */
+  table.scale{width:100%; border-collapse:collapse; font-size:14px;}
+  table.scale th, table.scale td{border:1px solid var(--line); padding:7px 10px; text-align:left;}
+  table.scale th{background:var(--navy); color:#fff; font-weight:700;}
+  table.scale td:first-child{text-align:center; font-weight:700; color:var(--navy); width:60px;}
+  /* gap header w/ live pill */
+  .gaphead{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+  .pill{display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:14px;
+    padding:6px 12px; border-radius:999px; background:var(--light); color:var(--grey); white-space:nowrap;}
+  .pill .score{font-size:16px;}
+  .pill.high{background:#F6E4E1; color:var(--high);}
+  .pill.mod{background:#F6EFD8; color:var(--mod);}
+  .pill.low{background:#DDF3EE; color:var(--low);}
+  /* criterion rows */
+  .crit{padding:12px 0; border-top:1px solid var(--line);}
+  .crit:first-of-type{border-top:none;}
+  .crit .q{font-size:15px; margin-bottom:8px;}
+  .crit .controls{display:flex; gap:14px; flex-wrap:wrap; align-items:center;}
+  .scoregroup{display:inline-flex; gap:6px;}
+  .scoregroup button{width:40px; height:40px; border:1px solid #c7d3db; background:#fff; color:var(--grey);
+    border-radius:8px; font-size:15px; font-weight:700; cursor:pointer; transition:all .12s;}
+  .scoregroup button:hover{border-color:var(--teal);}
+  .scoregroup button.sel{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .crit .note{flex:1 1 240px; min-width:200px;}
+  .crit .note input{width:100%; padding:8px 10px; font-size:14px; font-family:inherit;
+    border:1px solid #c7d3db; border-radius:7px;}
+  .crit .note input:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(2,128,144,.15);}
+  .scorelabel{font-size:12px; color:var(--grey); margin-bottom:4px;}
+  /* summary */
+  table.summary{width:100%; border-collapse:collapse; font-size:15px;}
+  table.summary th, table.summary td{border:1px solid var(--line); padding:9px 12px; text-align:left;}
+  table.summary th{background:var(--navy); color:#fff;}
+  table.summary td.sc{text-align:center; font-weight:700; width:90px;}
+  table.summary tr.total td{background:var(--light); font-weight:700;}
+  .bands{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; font-size:13px;}
+  .bands span{padding:5px 10px; border-radius:6px; font-weight:700;}
+  .bands .b-high{background:#F6E4E1; color:var(--high);}
+  .bands .b-mod{background:#F6EFD8; color:var(--mod);}
+  .bands .b-low{background:#DDF3EE; color:var(--low);}
+  .field label{display:block; font-weight:600; font-size:15px; margin:14px 0 6px;}
+  .field textarea{width:100%; min-height:80px; padding:10px 12px; font-size:15px; font-family:inherit;
+    border:1px solid #c7d3db; border-radius:7px; resize:vertical;}
+  .field textarea:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(2,128,144,.15);}
+  .actions{position:sticky; bottom:0; background:rgba(244,248,250,.96); backdrop-filter:blur(4px);
+    border-top:1px solid var(--line); padding:14px 0; margin-top:10px;
+    display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+  .btn{border:none; border-radius:8px; padding:12px 20px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;}
+  .btn-primary{background:var(--teal); color:#fff;}
+  .btn-secondary{background:#fff; color:var(--navy); border:1px solid #c7d3db;}
+  .btn-secondary:hover{border-color:var(--teal);}
+  .foot{text-align:center; color:var(--grey); font-size:13px; margin-top:24px;}
+  @media print{.actions{display:none;} body{background:#fff;} section.card,.overall{box-shadow:none; break-inside:avoid;}
+    header.hero,.overall{-webkit-print-color-adjust:exact; print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<div class="logobar"><div class="inner"><img src="https://www.safepointit.com/wp-content/uploads/2026/01/SafePoint-Logo-Header.svg" alt="SafePoint IT"></div></div>
+<header class="hero"><div class="inner">
+  <h1>AI &amp; Cloud Security 5-Gap Assessment</h1>
+  <p>Interactive Checklist &amp; Scorecard</p>
+</div></header>
+
+<div class="wrap">
+  <div class="intro">
+    Score each criterion on a <strong>0–4 maturity scale</strong>. The tool averages each gap and rolls up an overall
+    readiness score with a risk rating as you go. Use the notes fields for evidence, then download or print the completed scorecard.
+  </div>
+
+  <!-- live overall banner -->
+  <div class="overall">
+    <div><div class="lbl">OVERALL READINESS</div><div class="num" id="overallNum">—</div></div>
+    <div class="meta">
+      <span class="pill" id="overallPill">Not yet scored</span>
+      <p id="overallMsg">Begin scoring the gaps below.</p>
+    </div>
+  </div>
+
+  <!-- scoring scale -->
+  <section class="card">
+    <h2>Scoring scale (0–4 maturity)</h2>
+    <p class="sub">Use the same scale for every criterion.</p>
+    <table class="scale">
+      <tr><th>Score</th><th>Level</th><th>What it means</th></tr>
+      <tr><td>0</td><td>Absent</td><td>Control does not exist; significant exposure.</td></tr>
+      <tr><td>1</td><td>Ad hoc</td><td>Handled informally or inconsistently; not documented.</td></tr>
+      <tr><td>2</td><td>Partial</td><td>In place for some systems/people but with clear gaps.</td></tr>
+      <tr><td>3</td><td>Managed</td><td>Consistently applied and documented.</td></tr>
+      <tr><td>4</td><td>Optimized</td><td>Managed, monitored, and reviewed on a schedule.</td></tr>
+    </table>
+  </section>
+
+  <div id="gaps"></div>
+
+  <!-- summary -->
+  <section class="card">
+    <h2>Scorecard summary</h2>
+    <p class="sub">Updates automatically as you score.</p>
+    <table class="summary" id="summaryTable">
+      <tr><th>Gap</th><th class="sc">Score</th><th>Risk level</th></tr>
+    </table>
+    <div class="bands">
+      <span class="b-high">High risk 0.0–1.4</span>
+      <span class="b-mod">Moderate 1.5–2.9</span>
+      <span class="b-low">Lower risk 3.0–4.0</span>
+    </div>
+    <div class="field">
+      <label>Top priority actions identified</label>
+      <textarea id="priority" placeholder="List the 3 most important actions to address first…"></textarea>
+    </div>
+  </section>
+
+  <section class="card" id="emailCard">
+    <h2>Email the results</h2>
+    <p class="sub">Send the completed scorecard automatically — to the practice/client and to the SafePoint team.</p>
+    <div class="field">
+      <label>Recipient email (practice / client)</label>
+      <input type="email" id="clientEmail" placeholder="them@theirpractice.com" style="width:100%;padding:10px 12px;font-size:15px;font-family:inherit;border:1px solid #c7d3db;border-radius:8px;">
+    </div>
+    <div id="emailThanks" style="display:none;margin-top:8px;padding:12px 14px;background:#DDF3EE;border-radius:8px;color:var(--teal);font-weight:700;">Sent! The results are on their way to the recipient and the SafePoint team.</div>
+  </section>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="emailBtn" type="button">✉️ Email my results</button>
+    <button class="btn btn-secondary" id="downloadBtn" type="button">⬇️ Download</button>
+    <button class="btn btn-secondary" id="printBtn" type="button">🖨️ Print / Save as PDF</button>
+    <button class="btn btn-secondary" id="resetBtn" type="button">↺ Reset</button>
+  </div>
+
+  <p class="foot">SafePoint IT · Confidential · safepointit.com · (847) 499-1500</p>
+</div>
+
+<script>
+  var GAPS = [
+    { title:"Gap 1 — Business Associate Agreements (BAA)",
+      intro:"Every vendor that creates, receives, maintains, or transmits PHI must have a signed BAA.",
+      criteria:[
+        "A complete inventory of vendors/tools that touch PHI exists.",
+        "A signed, current BAA is on file for each PHI-handling vendor.",
+        "AI tool vendors specifically are covered by a BAA.",
+        "BAAs are reviewed when tools or vendors change."
+      ]},
+    { title:"Gap 2 — Data flow",
+      intro:"Where PHI lives, how it moves, and whether it is used to train AI models.",
+      criteria:[
+        "Storage and processing locations for PHI are documented.",
+        "Data is encrypted at rest and in transit.",
+        "It is known and controlled whether AI tools use practice data for model training.",
+        "Data retention and deletion practices are defined."
+      ]},
+    { title:"Gap 3 — Access control",
+      intro:"Who can reach what, verified and revoked appropriately.",
+      criteria:[
+        "Multi-factor authentication (MFA) is enforced on key systems.",
+        "Access is role-based (least privilege), not shared logins.",
+        "A documented onboarding/offboarding process removes access promptly.",
+        "Privileged/admin accounts are limited and tracked."
+      ]},
+    { title:"Gap 4 — Visibility & monitoring",
+      intro:"The ability to detect and investigate misuse.",
+      criteria:[
+        "Logins and data access are logged.",
+        "Logs are reviewed or alerts are configured for anomalies.",
+        "The practice could detect improper access to patient data.",
+        "There is a defined way to investigate a suspected incident."
+      ]},
+    { title:"Gap 5 — Ownership & governance",
+      intro:"Clear accountability for tool adoption and security.",
+      criteria:[
+        "A defined approval process exists before new tools are adopted.",
+        "One accountable owner for security/compliance is named.",
+        "Staff know the process for requesting a new tool.",
+        "Security awareness training is provided to staff."
+      ]}
+  ];
+
+  // state[g][c] = number or null
+  var state = GAPS.map(function(g){ return g.criteria.map(function(){ return null; }); });
+  var notes = GAPS.map(function(g){ return g.criteria.map(function(){ return ""; }); });
+
+  // ===== CONFIG (server-side email delivery) =====
+  // Point this at your HubSpot Forms / Formspree / Zapier webhook URL. That handler emails
+  // the recipient AND notifies the SafePoint team (route to leads@infiniwiz.com server-side).
+  // Never put an internal email address in this file — page source is public.
+  var SUBMIT_ENDPOINT = "";
+
+  function riskInfo(v){
+    if(v === null || isNaN(v)) return {label:"Not scored", cls:"", txt:"—"};
+    if(v < 1.5) return {label:"High risk", cls:"high", txt:v.toFixed(1)};
+    if(v < 3.0) return {label:"Moderate", cls:"mod", txt:v.toFixed(1)};
+    return {label:"Lower risk", cls:"low", txt:v.toFixed(1)};
+  }
+  function gapAvg(gi){
+    var vals = state[gi].filter(function(v){ return v !== null; });
+    if(!vals.length) return null;
+    return vals.reduce(function(a,b){return a+b;},0) / vals.length;
+  }
+  function overallAvg(){
+    var subs = GAPS.map(function(_,gi){ return gapAvg(gi); }).filter(function(v){ return v !== null; });
+    if(!subs.length) return null;
+    return subs.reduce(function(a,b){return a+b;},0) / subs.length;
+  }
+
+  // build gap cards
+  var gapsEl = document.getElementById("gaps");
+  GAPS.forEach(function(gap, gi){
+    var card = document.createElement("section");
+    card.className = "card";
+    var head = document.createElement("div");
+    head.className = "gaphead";
+    head.innerHTML = '<h2>' + gap.title + '</h2><span class="pill" id="pill-'+gi+'">Not scored</span>';
+    card.appendChild(head);
+    var sub = document.createElement("p"); sub.className="sub"; sub.textContent = gap.intro;
+    card.appendChild(sub);
+
+    gap.criteria.forEach(function(crit, ci){
+      var row = document.createElement("div"); row.className = "crit";
+      var q = document.createElement("div"); q.className="q"; q.textContent = crit; row.appendChild(q);
+      var controls = document.createElement("div"); controls.className="controls";
+      // score group
+      var sgWrap = document.createElement("div");
+      var sl = document.createElement("div"); sl.className="scorelabel"; sl.textContent="Score (0–4)"; sgWrap.appendChild(sl);
+      var sg = document.createElement("div"); sg.className="scoregroup";
+      for(var s=0;s<=4;s++){
+        (function(scoreVal){
+          var b = document.createElement("button"); b.type="button"; b.textContent = scoreVal;
+          b.addEventListener("click", function(){
+            state[gi][ci] = (state[gi][ci] === scoreVal) ? null : scoreVal; // click again to clear
+            sg.querySelectorAll("button").forEach(function(x){ x.classList.remove("sel"); });
+            if(state[gi][ci] !== null) b.classList.add("sel");
+            recompute();
+          });
+          sg.appendChild(b);
+        })(s);
+      }
+      sgWrap.appendChild(sg); controls.appendChild(sgWrap);
+      // notes
+      var noteWrap = document.createElement("div"); noteWrap.className="note";
+      var nl = document.createElement("div"); nl.className="scorelabel"; nl.textContent="Notes / evidence"; noteWrap.appendChild(nl);
+      var ni = document.createElement("input"); ni.type="text"; ni.placeholder="Optional";
+      ni.addEventListener("input", function(){ notes[gi][ci] = ni.value; });
+      noteWrap.appendChild(ni); controls.appendChild(noteWrap);
+      row.appendChild(controls);
+      card.appendChild(row);
+    });
+    gapsEl.appendChild(card);
+  });
+
+  // build summary rows
+  var summary = document.getElementById("summaryTable");
+  GAPS.forEach(function(gap, gi){
+    var tr = document.createElement("tr");
+    tr.innerHTML = '<td>'+gap.title+'</td><td class="sc" id="sum-sc-'+gi+'">—</td><td id="sum-rk-'+gi+'">—</td>';
+    summary.appendChild(tr);
+  });
+  var totalTr = document.createElement("tr"); totalTr.className="total";
+  totalTr.innerHTML = '<td>Overall readiness</td><td class="sc" id="sum-sc-all">—</td><td id="sum-rk-all">—</td>';
+  summary.appendChild(totalTr);
+
+  function setPill(el, info){
+    el.className = "pill" + (info.cls ? " "+info.cls : "");
+    el.innerHTML = (info.txt!=="—" ? '<span class="score">'+info.txt+'</span> / 4 · ' : '') + info.label;
+  }
+
+  function recompute(){
+    GAPS.forEach(function(_, gi){
+      var avg = gapAvg(gi); var info = riskInfo(avg);
+      setPill(document.getElementById("pill-"+gi), info);
+      document.getElementById("sum-sc-"+gi).textContent = info.txt;
+      var rk = document.getElementById("sum-rk-"+gi); rk.textContent = info.label;
+      rk.style.color = avg===null ? "var(--grey)" : (info.cls==="high"?"var(--high)":info.cls==="mod"?"var(--mod)":"var(--low)");
+      rk.style.fontWeight = "700";
+    });
+    var oa = overallAvg(); var oinfo = riskInfo(oa);
+    document.getElementById("overallNum").textContent = (oa===null) ? "—" : oa.toFixed(1);
+    setPill(document.getElementById("overallPill"), oinfo);
+    document.getElementById("sum-sc-all").textContent = oinfo.txt;
+    var rkAll = document.getElementById("sum-rk-all"); rkAll.textContent = oinfo.label;
+    rkAll.style.color = oa===null ? "var(--grey)" : (oinfo.cls==="high"?"var(--high)":oinfo.cls==="mod"?"var(--mod)":"var(--low)");
+    var msg = "Begin scoring the gaps below.";
+    if(oa!==null){
+      if(oa<1.5) msg="Significant exposure — address before adopting new AI/cloud tools.";
+      else if(oa<3.0) msg="Foundation partly in place; prioritized fixes needed.";
+      else msg="Solid foundation; refine and monitor as you adopt.";
+    }
+    document.getElementById("overallMsg").textContent = msg;
+  }
+
+  document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    if(!confirm("Clear all scores and notes?")) return;
+    state = GAPS.map(function(g){ return g.criteria.map(function(){ return null; }); });
+    notes = GAPS.map(function(g){ return g.criteria.map(function(){ return ""; }); });
+    document.querySelectorAll(".scoregroup button").forEach(function(b){ b.classList.remove("sel"); });
+    document.querySelectorAll(".crit .note input").forEach(function(i){ i.value=""; });
+    document.getElementById("priority").value="";
+    recompute();
+  });
+
+  function buildReport(){
+    var lines = [];
+    lines.push("SAFEPOINT IT — AI & CLOUD SECURITY 5-GAP SCORECARD");
+    lines.push("Completed: " + new Date().toLocaleString());
+    var oa = overallAvg(); var oinfo = riskInfo(oa);
+    lines.push("OVERALL READINESS: " + oinfo.txt + " / 4  (" + oinfo.label + ")");
+    lines.push("");
+    GAPS.forEach(function(gap, gi){
+      var info = riskInfo(gapAvg(gi));
+      lines.push("== " + gap.title + " — " + info.txt + " / 4 (" + info.label + ") ==");
+      gap.criteria.forEach(function(crit, ci){
+        var sc = state[gi][ci]===null ? "—" : state[gi][ci];
+        var nt = notes[gi][ci] ? "  | notes: " + notes[gi][ci] : "";
+        lines.push("  [" + sc + "] " + crit + nt);
+      });
+      lines.push("");
+    });
+    lines.push("TOP PRIORITY ACTIONS:");
+    lines.push(document.getElementById("priority").value || "(none entered)");
+    return lines.join("\n");
+  }
+
+  document.getElementById("downloadBtn").addEventListener("click", function(){
+    var blob = new Blob([buildReport()], {type:"text/plain"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a"); a.href=url; a.download="SafePoint_5Gap_Scorecard.txt";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+
+  document.getElementById("emailBtn").addEventListener("click", function(){
+    var email = document.getElementById("clientEmail").value.trim();
+    if(!email || email.indexOf("@") < 1){ alert("Please enter a valid recipient email."); return; }
+    var oa = overallAvg(); var oinfo = riskInfo(oa);
+    var payload = { recipient_email: email, overall_score: oinfo.txt, overall_risk: oinfo.label, report: buildReport(), submitted: new Date().toISOString() };
+    if(!SUBMIT_ENDPOINT){
+      alert("Email delivery isn't connected yet. Until the endpoint is set, use “Download” and send the file.\n\n(Setup: point SUBMIT_ENDPOINT near the top of this file at your HubSpot / Formspree / Zapier URL.)");
+      return;
+    }
+    var btn = this; btn.disabled = true; btn.textContent = "Sending…";
+    fetch(SUBMIT_ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)})
+      .then(function(r){ if(!r.ok) throw 0; document.getElementById("emailThanks").style.display="block"; btn.textContent="✉️ Sent"; })
+      .catch(function(){ btn.disabled=false; btn.textContent="✉️ Email my results"; alert("Something went wrong sending. Please try again, or use Download."); });
+  });
+
+  recompute();
+</script>
+</body>
+</html>
