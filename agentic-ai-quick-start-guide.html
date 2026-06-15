@@ -4,98 +4,101 @@
 <meta charset="utf-8">
 <title>Agentic AI Quick-Start Guide — SafePoint IT</title>
 <style>
-  /* ── SafePoint IT brand tokens (from Alek's marketing-sales-engine repo) ── */
+  /* ── SafePoint IT brand tokens (Alek's marketing-sales-engine repo) ── */
   :root{
     --green:#C1D82F; --green-deep:#9bb00f; --navy:#161925; --blue:#0054AE;
-    --muted:#666666; --rule:#cccccc; --callout-bg:#f9fbe7; --warn:#f59e0b; --ink:#222;
+    --muted:#666666; --rule:#cccccc; --hair:#ececec; --callout-bg:#f9fbe7; --warn:#f59e0b;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
-  body{
-    font-family:-apple-system,"Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif;
-    color:var(--navy); -webkit-font-smoothing:antialiased; font-size:12.5px; line-height:1.42;
-  }
+  body{ font-family:-apple-system,"Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif;
+        color:var(--navy); -webkit-font-smoothing:antialiased; font-size:13px; line-height:1.42; }
   @page{ size:Letter; margin:0; }
-  .page{ position:relative; width:8.5in; height:11in; padding:0.55in 0.62in 0.5in;
-         page-break-after:always; overflow:hidden; }
+  .page{ position:relative; width:8.5in; height:11in; padding:0.6in 0.62in 0.78in;
+         page-break-after:always; overflow:hidden; display:flex; flex-direction:column; }
   .page:last-child{ page-break-after:auto; }
 
-  .topbar{ position:absolute; top:0; left:0; right:0; height:9px; background:var(--green); }
+  .topbar{ position:absolute; top:0; left:0; right:0; height:10px; background:var(--green); }
 
-  .head{ display:flex; align-items:center; justify-content:space-between; margin-top:8px; }
-  .head img{ height:26px; }
-  .head .kb{ font-size:9.5px; font-weight:800; letter-spacing:.13em; text-transform:uppercase;
-             color:var(--blue); }
+  .head{ display:flex; align-items:center; justify-content:space-between; }
+  .head img{ height:27px; }
+  .head .kb{ font-size:9.5px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--blue); }
   .conthead{ display:flex; align-items:center; justify-content:space-between;
-             border-bottom:1px solid var(--rule); padding-bottom:7px; margin-top:6px; }
-  .conthead img{ height:18px; }
+             border-bottom:1px solid var(--rule); padding-bottom:9px; }
+  .conthead img{ height:19px; }
   .conthead .s{ font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); }
 
-  h1{ font-size:29px; line-height:1.02; font-weight:800; letter-spacing:-.015em; margin:14px 0 6px; }
+  h1{ font-size:33px; line-height:1.02; font-weight:800; letter-spacing:-.015em; margin:16px 0 7px; }
   h1 .dot{ color:var(--green); }
-  .sub{ font-size:13px; color:#33384a; max-width:5.7in; margin:0 0 10px; }
-
-  .what{ font-size:12.5px; color:#33384a; margin:0 0 9px; }
+  .sub{ font-size:13.5px; color:#33384a; max-width:6.1in; margin:0 0 14px; }
+  .what{ font-size:13px; color:#33384a; margin:0 0 16px; }
   .what b{ color:var(--navy); }
 
-  .fw{ background:var(--callout-bg); border-left:4px solid var(--green); border-radius:6px;
-       padding:9px 13px; margin:0 0 14px; font-size:12px; line-height:1.5; }
-  /* lime is accent-only; chip text is navy so it passes WCAG AA on light */
-  .chip{ display:inline-block; font-size:8.5px; font-weight:800; letter-spacing:.07em;
-         text-transform:uppercase; padding:1.5px 7px; border-radius:10px;
-         border:1.5px solid var(--green); color:var(--navy); background:#fbfdef; vertical-align:middle; }
-  .chip.lane{ border-color:var(--blue); color:var(--blue); background:#eef4fb; }
-  .chip.loop{ border-color:var(--navy); color:var(--navy); background:#eef0f4; }
+  /* framework — three cards */
+  .fw{ display:flex; gap:11px; margin-bottom:6px; }
+  .fwc{ flex:1; background:var(--callout-bg); border:1px solid #e8eccb; border-top:3px solid var(--green);
+        border-radius:7px; padding:11px 13px; }
+  .fwc.lane{ border-top-color:var(--blue); }
+  .fwc.loop{ border-top-color:var(--navy); }
+  .fwc .chip{ margin-bottom:6px; }
+  .fwc .d{ font-size:12px; color:#33384a; line-height:1.4; }
+  .fwlead{ font-size:11.5px; color:var(--muted); margin:0 0 9px; }
 
-  .seclabel{ font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-             color:var(--blue); margin:4px 0 2px; }
-  .secnote{ font-size:11px; color:var(--muted); margin:0 0 6px; }
+  .chip{ display:inline-block; font-size:8.5px; font-weight:800; letter-spacing:.07em; text-transform:uppercase;
+         padding:2px 8px; border-radius:11px; border:1.5px solid var(--green); color:var(--navy);
+         background:#fbfdef; vertical-align:middle; }
+  .chip.lane{ border-color:var(--blue); } .chip.loop{ border-color:var(--navy); }
 
-  .catrow{ display:flex; align-items:center; gap:8px; margin:11px 0 4px;
-           border-top:1px solid var(--rule); padding-top:7px; }
-  .catrow:first-of-type{ border-top:none; padding-top:0; }
-  .cat{ font-size:10.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--navy); }
+  .seclabel{ font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); }
+  .secnote{ font-size:11.5px; color:var(--muted); margin:2px 0 0; }
 
-  /* real, clickable checkboxes */
-  .item{ display:flex; gap:9px; align-items:flex-start; margin:5px 0; cursor:pointer; }
-  .item input{ appearance:none; -webkit-appearance:none; flex:none; width:15px; height:15px;
-               border:2px solid var(--green-deep); border-radius:4px; margin:1px 0 0; cursor:pointer;
-               background:#fff; position:relative; }
+  /* checklist fills the remaining height */
+  .list{ flex:1; display:flex; flex-direction:column; margin-top:12px; }
+  .catrow{ display:flex; align-items:center; gap:9px; margin-top:auto; padding:9px 0 3px;
+           border-bottom:2px solid var(--navy); }
+  .catrow:first-child{ margin-top:0; }
+  .cat{ font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--navy); }
+
+  .item{ display:flex; gap:12px; align-items:flex-start; padding:0; margin:0;
+         border-bottom:1px solid var(--hair); cursor:pointer; }
+  .itemwrap{ display:flex; flex-direction:column; justify-content:center; min-height:46px; padding:6px 0; }
+  .item input{ appearance:none; -webkit-appearance:none; flex:none; width:20px; height:20px;
+               border:2px solid var(--green-deep); border-radius:5px; background:#fff;
+               position:relative; cursor:pointer; align-self:center; }
   .item input:checked{ background:var(--green); border-color:var(--green-deep); }
-  .item input:checked::after{ content:"✓"; position:absolute; top:-2px; left:1.5px;
-                              font-size:12px; font-weight:900; color:var(--navy); }
+  .item input:checked::after{ content:"✓"; position:absolute; top:-1px; left:3px; font-size:15px; font-weight:900; color:var(--navy); }
   .item input:focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
-  a:focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
-  .item .t{ font-size:12.5px; font-weight:700; color:var(--navy); }
+  .item .t{ font-size:13px; font-weight:700; color:var(--navy); }
   .item .t .h{ font-weight:400; color:var(--muted); }
   .item.done .t{ color:var(--muted); }
+  a:focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
 
-  /* steps */
-  .step{ display:flex; gap:11px; margin:7px 0; }
-  .step .n{ flex:none; width:22px; height:22px; border-radius:6px; background:var(--navy); color:#fff;
-            font-weight:800; font-size:11.5px; display:flex; align-items:center; justify-content:center; }
-  .step .t{ font-size:12.5px; }
-  .step .t b{ color:var(--navy); }
-  .grp{ margin:9px 0 2px; }
-  .grp .lbl{ font-size:11px; color:var(--muted); margin-left:7px; }
+  /* steps (page 2) fill height */
+  .steps{ flex:1; display:flex; flex-direction:column; }
+  .grp{ display:flex; align-items:center; gap:9px; margin:14px 0 4px; }
+  .grp:first-child{ margin-top:6px; }
+  .grp .lbl{ font-size:11.5px; color:var(--muted); }
+  .step{ display:flex; gap:13px; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--hair); }
+  .step .n{ flex:none; width:26px; height:26px; border-radius:7px; background:var(--navy); color:#fff;
+            font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .step .t{ font-size:13px; padding-top:2px; } .step .t b{ color:var(--navy); }
 
-  .pit{ background:#fff8e1; border:1px solid var(--warn); border-radius:6px; padding:8px 12px;
-        font-size:11.5px; line-height:1.5; margin:12px 0; }
+  .pit{ background:#fff8e1; border:1px solid var(--warn); border-radius:7px; padding:10px 14px;
+        font-size:12px; line-height:1.5; margin:14px 0 0; }
   .pit b{ color:#9a6200; }
 
-  .wbox{ background:var(--navy); color:#fff; border-radius:9px; padding:14px 17px; margin-top:12px;
-         display:flex; justify-content:space-between; align-items:center; gap:16px; }
-  .wbox .k{ font-size:9px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--green); }
-  .wbox .ti{ font-size:19px; font-weight:800; line-height:1.05; }
-  .wbox .when{ font-size:11.5px; color:var(--green); font-weight:700; margin-top:5px; }
-  .wbox .r{ font-size:11px; color:#c7cbd6; max-width:2.6in; }
+  /* CTA band anchored to page bottom */
+  .wbox{ background:var(--navy); color:#fff; border-radius:10px; padding:18px 22px; margin-top:14px;
+         display:flex; justify-content:space-between; align-items:center; gap:20px; }
+  .wbox .k{ font-size:9.5px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--green); }
+  .wbox .ti{ font-size:21px; font-weight:800; line-height:1.06; margin-top:3px; }
+  .wbox .when{ font-size:12px; color:var(--green); font-weight:700; margin-top:7px; }
+  .wbox .r{ font-size:11.5px; color:#c7cbd6; max-width:2.7in; line-height:1.5; }
   .wbox .r b{ color:#fff; }
-  /* primary CTA: navy text on lime passes contrast; clearly tappable */
-  .cta{ display:inline-block; margin-top:9px; background:var(--green); color:var(--navy);
-        font-size:11.5px; font-weight:800; letter-spacing:.01em; text-decoration:none;
-        padding:7px 14px; border-radius:6px; }
+  .cta{ display:inline-block; margin-top:10px; background:var(--green); color:var(--navy);
+        font-size:12px; font-weight:800; text-decoration:none; padding:8px 15px; border-radius:7px; }
 
-  .foot{ position:absolute; left:0.62in; right:0.62in; bottom:0.32in; }
+  .foot{ position:absolute; left:0.62in; right:0.62in; bottom:0.34in; }
   .foot .ac{ height:2px; background:var(--green); margin-bottom:6px; }
   .foot .rw{ display:flex; justify-content:space-between; font-size:8.5px; color:var(--muted); }
   .foot .rw b{ color:var(--navy); }
@@ -118,38 +121,38 @@
   </div>
 
   <h1>Agentic AI Quick-Start Guide<span class="dot">.</span></h1>
-  <p class="sub">A checklist and setup walkthrough for designing your first AI agent —
-    built for business operators, not engineers. Tick the boxes you can already check; the rest is where to start.</p>
+  <p class="sub">A checklist and setup walkthrough for designing your first AI agent — built for business
+    operators, not engineers. Tick the boxes you can already check; the rest is where to start.</p>
+  <p class="what"><b>Generative AI answers</b> questions. <b>Agentic AI acts</b> — across your email, tickets,
+    files, and workflows. A step-change in leverage, and a step-change in risk. Capturing one without the other is the whole game.</p>
 
-  <p class="what"><b>Generative AI answers</b> questions. <b>Agentic AI acts</b> — across your email,
-    tickets, files, and workflows. That's a step-change in leverage, and a step-change in risk.
-    Capturing one without the other is the whole game.</p>
-
+  <p class="fwlead">Every agent worth shipping comes down to three decisions — we'll design one live on July 23:</p>
   <div class="fw">
-    Every agent worth shipping comes down to three decisions — we'll design one live on July 23:<br>
-    <span class="chip">Brief</span> the one job, defined tightly &nbsp;·&nbsp;
-    <span class="chip lane">Lane</span> what it may &amp; may not do &nbsp;·&nbsp;
-    <span class="chip loop">Loop</span> how a human stays in control
+    <div class="fwc"><span class="chip">Brief</span><div class="d">The one job, defined tightly.</div></div>
+    <div class="fwc lane"><span class="chip lane">Lane</span><div class="d">What it may &amp; may not do.</div></div>
+    <div class="fwc loop"><span class="chip loop">Loop</span><div class="d">How a human stays in control.</div></div>
   </div>
 
-  <div class="seclabel">Readiness checklist · before you build</div>
-  <p class="secnote">Three categories, ten items. Can't tick a box yet? That's your starting point.</p>
+  <div class="list">
+    <div style="margin-bottom:6px"><span class="seclabel">Readiness checklist · before you build</span>
+      <div class="secnote">Three categories, ten items. Can't tick a box yet? That's your starting point.</div></div>
 
-  <div class="catrow"><span class="cat">Foundation</span><span class="chip">Brief</span></div>
-  <label class="item"><input type="checkbox"><span class="t">One specific task in mind — a single task, not a category. <span class="h">“Draft a follow-up after every discovery call,” not “automate sales.”</span></span></label>
-  <label class="item"><input type="checkbox"><span class="t">The task is repetitive and follows a predictable pattern. <span class="h">If the steps change every time, there's nothing to learn.</span></span></label>
-  <label class="item"><input type="checkbox"><span class="t">The data it needs is clean, organized, and accessible. <span class="h">Garbage in, faster garbage out.</span></span></label>
+    <div class="catrow"><span class="cat">Foundation</span><span class="chip">Brief</span></div>
+    <label class="item"><input type="checkbox"><span class="itemwrap"><span class="t">One specific task in mind — a single task, not a category. <span class="h">“Draft a follow-up after every discovery call,” not “automate sales.”</span></span></span></label>
+    <label class="item"><input type="checkbox"><span class="itemwrap"><span class="t">The task is repetitive and follows a predictable pattern. <span class="h">If the steps change every time, there's nothing to learn.</span></span></span></label>
+    <label class="item"><input type="checkbox"><span class="itemwrap"><span class="t">The data it needs is clean, organized, and accessible. <span class="h">Garbage in, faster garbage out.</span></span></span></label>
 
-  <div class="catrow"><span class="cat">Ownership &amp; Success</span><span class="chip">Brief</span></div>
-  <label class="item"><input type="checkbox"><span class="t">A named human owner. <span class="h">Watches it, fixes it, on the hook when it's wrong.</span></span></label>
-  <label class="item"><input type="checkbox"><span class="t">You can describe success in one sentence. <span class="h">Vague success → vague agent.</span></span></label>
-  <label class="item"><input type="checkbox"><span class="t">You can describe failure in one sentence. <span class="h">Knowing “wrong” is how you catch it early.</span></span></label>
+    <div class="catrow"><span class="cat">Ownership &amp; Success</span><span class="chip">Brief</span></div>
+    <label class="item"><input type="checkbox"><span class="itemwrap"><span class="t">A named human owner. <span class="h">Watches it, fixes it, on the hook when it's wrong.</span></span></span></label>
+    <label class="item"><input type="checkbox"><span class="itemwrap"><span class="t">You can describe success in one sentence. <span class="h">Vague success → vague agent.</span></span></span></label>
+    <label class="item"><input type="checkbox"><span class="itemwrap"><span class="t">You can describe failure in one sentence. <span class="h">Knowing “wrong” is how you catch it early.</span></span></span></label>
 
-  <div class="catrow"><span class="cat">Guardrails &amp; Oversight</span><span class="chip lane">Lane</span><span class="chip loop">Loop</span></div>
-  <label class="item"><input type="checkbox"><span class="t">Defined what it IS allowed to do. <span class="h">An allow list beats “use good judgment.”</span></span></label>
-  <label class="item"><input type="checkbox"><span class="t">Defined what it is NOT allowed to do. <span class="h">Spell out the hard nos.</span></span></label>
-  <label class="item"><input type="checkbox"><span class="t">A human review step in the workflow. <span class="h">Especially for anything sent, updated, or paid.</span></span></label>
-  <label class="item"><input type="checkbox"><span class="t">An escalation path when things go wrong. <span class="h">Who's alerted, how fast, with what authority.</span></span></label>
+    <div class="catrow"><span class="cat">Guardrails &amp; Oversight</span><span class="chip lane">Lane</span><span class="chip loop">Loop</span></div>
+    <label class="item"><input type="checkbox"><span class="itemwrap"><span class="t">Defined what it IS allowed to do. <span class="h">An allow list beats “use good judgment.”</span></span></span></label>
+    <label class="item"><input type="checkbox"><span class="itemwrap"><span class="t">Defined what it is NOT allowed to do. <span class="h">Spell out the hard nos.</span></span></span></label>
+    <label class="item"><input type="checkbox"><span class="itemwrap"><span class="t">A human review step in the workflow. <span class="h">Especially for anything sent, updated, or paid.</span></span></span></label>
+    <label class="item" style="border-bottom:none"><input type="checkbox"><span class="itemwrap"><span class="t">An escalation path when things go wrong. <span class="h">Who's alerted, how fast, with what authority.</span></span></span></label>
+  </div>
 
   <div class="foot"><div class="ac"></div><div class="rw">
     <span>Agentic AI Quick-Start Guide &nbsp;·&nbsp; <b>SafePoint IT</b> &nbsp;·&nbsp; safepointit.com</span><span>1 / 2</span></div></div>
@@ -160,25 +163,27 @@
   <div class="topbar"></div>
   <div class="conthead"><img src="safepoint-logo.svg" alt="SafePoint IT"><span class="s">Setup walkthrough &amp; what's next</span></div>
 
-  <h1 style="font-size:25px;margin-top:13px">From idea to working agent.</h1>
-  <p class="sub" style="margin-bottom:8px">Seven steps, in order. The first three need nothing but a notebook.</p>
+  <h1 style="font-size:28px">From idea to working agent.</h1>
+  <p class="sub" style="margin-bottom:2px">Seven steps, in order. The first three need nothing but a notebook.</p>
 
-  <div class="grp"><span class="chip">Brief</span><span class="lbl">Define the one job.</span></div>
-  <div class="step"><div class="n">1</div><div class="t"><b>Document the task as it works today</b> — who does it, what triggers it, what they produce, where it breaks. You can't automate what you can't describe.</div></div>
-  <div class="step"><div class="n">2</div><div class="t"><b>Define inputs and outputs explicitly</b> — every input it needs, every output it must produce. Most early failures are interface problems, not intelligence problems.</div></div>
-  <div class="step"><div class="n">3</div><div class="t"><b>Write the one-sentence brief</b> — “This agent's only job is to ______.” If it won't fit in one sentence, the scope is too big.</div></div>
+  <div class="steps">
+    <div class="grp"><span class="chip">Brief</span><span class="lbl">Define the one job.</span></div>
+    <div class="step"><div class="n">1</div><div class="t"><b>Document the task as it works today</b> — who does it, what triggers it, what they produce, where it breaks. You can't automate what you can't describe.</div></div>
+    <div class="step"><div class="n">2</div><div class="t"><b>Define inputs and outputs explicitly</b> — every input it needs, every output it must produce. Most early failures are interface problems, not intelligence problems.</div></div>
+    <div class="step"><div class="n">3</div><div class="t"><b>Write the one-sentence brief</b> — “This agent's only job is to ______.” If it won't fit in one sentence, the scope is too big.</div></div>
 
-  <div class="grp"><span class="chip lane">Lane</span><span class="lbl">Set the boundaries before it acts.</span></div>
-  <div class="step"><div class="n">4</div><div class="t"><b>Set the lane — allow &amp; deny lists</b> — two short lists of what it IS and is NOT allowed to do: actions, systems, recipients, topics. AI defaults to helpful; without limits, helpful becomes harmful.</div></div>
+    <div class="grp"><span class="chip lane">Lane</span><span class="lbl">Set the boundaries before it acts.</span></div>
+    <div class="step"><div class="n">4</div><div class="t"><b>Set the lane — allow &amp; deny lists</b> — two short lists of what it IS and is NOT allowed to do: actions, systems, recipients, topics. AI defaults to helpful; without limits, helpful becomes harmful.</div></div>
 
-  <div class="grp"><span class="chip loop">Loop</span><span class="lbl">Keep a human in control.</span></div>
-  <div class="step"><div class="n">5</div><div class="t"><b>Build the human checkpoint</b> — who reviews, when, and with what authority to stop or approve. Trust is earned one verified output at a time.</div></div>
-  <div class="step"><div class="n">6</div><div class="t"><b>Run a parallel trial</b> — 2–4 weeks producing alongside the human process; log every disagreement. You learn where it fails before it fails at scale.</div></div>
-  <div class="step"><div class="n">7</div><div class="t"><b>Define your kill switch</b> — what triggers shutdown, and who can pull it. Decide before something goes wrong, not under pressure.</div></div>
+    <div class="grp"><span class="chip loop">Loop</span><span class="lbl">Keep a human in control.</span></div>
+    <div class="step"><div class="n">5</div><div class="t"><b>Build the human checkpoint</b> — who reviews, when, and with what authority to stop or approve. Trust is earned one verified output at a time.</div></div>
+    <div class="step"><div class="n">6</div><div class="t"><b>Run a parallel trial</b> — 2–4 weeks producing alongside the human process; log every disagreement. You learn where it fails before it fails at scale.</div></div>
+    <div class="step" style="border-bottom:none"><div class="n">7</div><div class="t"><b>Define your kill switch</b> — what triggers shutdown, and who can pull it. Decide before something goes wrong, not under pressure.</div></div>
 
-  <div class="pit"><b>Five traps to skip:</b> going too big too fast &nbsp;·&nbsp; skipping the human review &nbsp;·&nbsp;
-    pointing it at messy data &nbsp;·&nbsp; ignoring prompt injection (hidden instructions in documents &amp; emails) &nbsp;·&nbsp;
-    no defined success metric. Catching these now is far cheaper than later.</div>
+    <div class="pit"><b>Five traps to skip:</b> going too big too fast &nbsp;·&nbsp; skipping the human review &nbsp;·&nbsp;
+      pointing it at messy data &nbsp;·&nbsp; ignoring prompt injection (hidden instructions in documents &amp; emails) &nbsp;·&nbsp;
+      no defined success metric. Catching these now is far cheaper than later.</div>
+  </div>
 
   <div class="wbox">
     <div>
@@ -196,11 +201,10 @@
 </section>
 
 <script>
-  // Make checkboxes persist in the browser, and dim completed items.
   (function(){
     var boxes = document.querySelectorAll('.item input[type=checkbox]');
     boxes.forEach(function(b,i){
-      var key = 'qsg-check-'+i;
+      var key='qsg-check-'+i;
       try{ if(localStorage.getItem(key)==='1'){ b.checked=true; } }catch(e){}
       var sync=function(){ b.closest('.item').classList.toggle('done', b.checked);
         try{ localStorage.setItem(key, b.checked?'1':'0'); }catch(e){} };
