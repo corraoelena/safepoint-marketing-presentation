@@ -6,464 +6,199 @@
 <style>
   /* ── SafePoint IT brand tokens (from Alek's marketing-sales-engine repo) ── */
   :root{
-    --green:#C1D82F;      /* signature brand green */
-    --green-deep:#9bb00f; /* darker green for small text/contrast */
-    --navy:#161925;       /* headings */
-    --blue:#0054AE;       /* eyebrows / section labels */
-    --muted:#666666;      /* secondary text */
-    --rule:#cccccc;       /* hairlines */
-    --callout-bg:#f9fbe7; /* light brand-green tint */
-    --warn-bg:#fff8e1;    /* amber tint */
-    --warn:#f59e0b;       /* warn border */
-    --ink:#222222;
-    --soft:#f5f7fa;
+    --green:#C1D82F; --green-deep:#9bb00f; --navy:#161925; --blue:#0054AE;
+    --muted:#666666; --rule:#cccccc; --callout-bg:#f9fbe7; --warn:#f59e0b; --ink:#222;
   }
-
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     font-family:-apple-system,"Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif;
-    color:var(--navy);
-    -webkit-font-smoothing:antialiased;
-    font-size:15px;
-    line-height:1.5;
+    color:var(--navy); -webkit-font-smoothing:antialiased; font-size:12.5px; line-height:1.42;
   }
-
   @page{ size:Letter; margin:0; }
-
-  .page{
-    position:relative;
-    width:8.5in; height:11in;
-    padding:0.85in 0.9in 1in 0.9in;
-    page-break-after:always;
-    overflow:hidden;
-  }
+  .page{ position:relative; width:8.5in; height:11in; padding:0.55in 0.62in 0.5in;
+         page-break-after:always; overflow:hidden; }
   .page:last-child{ page-break-after:auto; }
 
-  /* ── Running header on content pages ── */
-  .rh{ display:flex; align-items:center; justify-content:space-between;
-       border-bottom:1px solid var(--rule); padding-bottom:10px; margin-bottom:26px; }
-  .rh img{ height:22px; }
-  .rh .sec{ font-size:10.5px; font-weight:700; letter-spacing:.10em;
-            color:var(--blue); text-transform:uppercase; }
-  .rh .sec b{ color:var(--navy); }
+  .topbar{ position:absolute; top:0; left:0; right:0; height:9px; background:var(--green); }
 
-  /* ── Running footer (Alek's pattern: green accent rule + muted line + page #) ── */
-  .rf{ position:absolute; left:0.9in; right:0.9in; bottom:0.55in; }
-  .rf .accent{ height:2px; background:var(--green); margin-bottom:7px; }
-  .rf .row{ display:flex; justify-content:space-between;
-            font-size:9px; color:var(--muted); letter-spacing:.02em; }
-  .rf .row b{ color:var(--navy); }
+  .head{ display:flex; align-items:center; justify-content:space-between; margin-top:8px; }
+  .head img{ height:26px; }
+  .head .kb{ font-size:9.5px; font-weight:800; letter-spacing:.13em; text-transform:uppercase;
+             color:var(--green-deep); }
+  .conthead{ display:flex; align-items:center; justify-content:space-between;
+             border-bottom:1px solid var(--rule); padding-bottom:7px; margin-top:6px; }
+  .conthead img{ height:18px; }
+  .conthead .s{ font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); }
 
-  .eyebrow{ font-size:11px; font-weight:700; letter-spacing:.14em;
-            text-transform:uppercase; color:var(--blue); margin-bottom:14px; }
-  h1{ font-size:34px; line-height:1.05; font-weight:800; letter-spacing:-.01em;
-      margin:0 0 10px; color:var(--navy); }
-  h2{ font-size:21px; font-weight:800; letter-spacing:-.01em; margin:26px 0 8px; color:var(--navy); }
-  .lede{ font-size:15.5px; color:#33384a; max-width:6.0in; }
-  p{ margin:0 0 11px; }
-  .dim{ color:var(--muted); }
-  strong{ color:var(--navy); }
+  h1{ font-size:29px; line-height:1.02; font-weight:800; letter-spacing:-.015em; margin:14px 0 6px; }
+  h1 .dot{ color:var(--green); }
+  .sub{ font-size:13px; color:#33384a; max-width:5.7in; margin:0 0 10px; }
 
-  /* ── Callout (green) ── */
-  .callout{ background:var(--callout-bg); border-left:4px solid var(--green);
-            border-radius:6px; padding:16px 20px; margin:20px 0; }
-  .callout .k{ font-size:10.5px; font-weight:700; letter-spacing:.12em;
-               text-transform:uppercase; color:var(--green-deep); margin-bottom:6px; }
-  .callout .big{ font-size:17px; font-weight:700; color:var(--navy); line-height:1.45; }
+  .what{ font-size:12.5px; color:#33384a; margin:0 0 9px; }
+  .what b{ color:var(--navy); }
 
-  /* ── Framework chips ── */
-  .chip{ display:inline-block; font-size:9.5px; font-weight:800; letter-spacing:.08em;
-         text-transform:uppercase; padding:2px 8px; border-radius:11px;
-         border:1.5px solid var(--green); color:var(--green-deep); background:#fbfdef; }
+  .fw{ background:var(--callout-bg); border-left:4px solid var(--green); border-radius:6px;
+       padding:9px 13px; margin:0 0 14px; font-size:12px; line-height:1.5; }
+  .chip{ display:inline-block; font-size:8.5px; font-weight:800; letter-spacing:.07em;
+         text-transform:uppercase; padding:1.5px 7px; border-radius:10px;
+         border:1.5px solid var(--green); color:var(--green-deep); background:#fbfdef; vertical-align:middle; }
   .chip.lane{ border-color:var(--blue); color:var(--blue); background:#eef4fb; }
   .chip.loop{ border-color:var(--navy); color:var(--navy); background:#eef0f4; }
 
-  /* ── Checklist ── */
-  .catrow{ display:flex; align-items:center; gap:10px; margin:22px 0 8px;
-           border-top:1px solid var(--rule); padding-top:12px; }
+  .seclabel{ font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+             color:var(--blue); margin:4px 0 2px; }
+  .secnote{ font-size:11px; color:var(--muted); margin:0 0 6px; }
+
+  .catrow{ display:flex; align-items:center; gap:8px; margin:11px 0 4px;
+           border-top:1px solid var(--rule); padding-top:7px; }
   .catrow:first-of-type{ border-top:none; padding-top:0; }
-  .cat{ font-size:11.5px; font-weight:800; letter-spacing:.10em;
-        text-transform:uppercase; color:var(--blue); }
-  .item{ display:flex; gap:12px; margin:11px 0; align-items:flex-start; }
-  .box{ flex:none; width:17px; height:17px; border:2px solid var(--green);
-        border-radius:4px; margin-top:1px; }
-  .item .t{ font-size:14.5px; font-weight:700; color:var(--navy); }
-  .item .d{ font-size:12.5px; color:var(--muted); margin-top:2px; }
-  .num{ color:var(--green-deep); font-weight:800; margin-right:6px; }
+  .cat{ font-size:10.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--navy); }
 
-  /* ── Steps ── */
-  .step{ display:flex; gap:16px; margin:18px 0; }
-  .step .n{ flex:none; width:34px; height:34px; border-radius:8px; background:var(--navy);
-            color:#fff; font-weight:800; font-size:16px; display:flex; align-items:center;
-            justify-content:center; }
-  .step .body{ flex:1; }
-  .step .h{ font-size:15.5px; font-weight:800; color:var(--navy); margin-bottom:5px; }
-  .lab{ font-size:10px; font-weight:800; letter-spacing:.10em; text-transform:uppercase;
-        color:var(--green-deep); }
-  .lab.why{ color:var(--muted); }
-  .step p{ font-size:13px; margin:1px 0 7px; }
+  /* real, clickable checkboxes */
+  .item{ display:flex; gap:9px; align-items:flex-start; margin:5px 0; cursor:pointer; }
+  .item input{ appearance:none; -webkit-appearance:none; flex:none; width:15px; height:15px;
+               border:2px solid var(--green-deep); border-radius:4px; margin:1px 0 0; cursor:pointer;
+               background:#fff; position:relative; }
+  .item input:checked{ background:var(--green); border-color:var(--green-deep); }
+  .item input:checked::after{ content:"✓"; position:absolute; top:-2px; left:1.5px;
+                              font-size:12px; font-weight:900; color:var(--navy); }
+  .item .t{ font-size:12.5px; font-weight:700; color:var(--navy); }
+  .item .t .h{ font-weight:400; color:var(--muted); }
+  .item.done .t{ color:var(--muted); }
 
-  /* ── Pitfalls ── */
-  .pit{ display:flex; gap:13px; margin:15px 0; }
-  .pit .x{ flex:none; width:24px; height:24px; border-radius:50%; background:var(--warn-bg);
-           border:2px solid var(--warn); color:#b45309; font-weight:800; font-size:14px;
-           display:flex; align-items:center; justify-content:center; }
-  .pit .h{ font-size:14.5px; font-weight:800; color:var(--navy); }
-  .pit p{ font-size:12.5px; color:var(--muted); margin:2px 0 0; }
+  /* steps */
+  .step{ display:flex; gap:11px; margin:7px 0; }
+  .step .n{ flex:none; width:22px; height:22px; border-radius:6px; background:var(--navy); color:#fff;
+            font-weight:800; font-size:11.5px; display:flex; align-items:center; justify-content:center; }
+  .step .t{ font-size:12.5px; }
+  .step .t b{ color:var(--navy); }
+  .grp{ margin:9px 0 2px; }
+  .grp .lbl{ font-size:11px; color:var(--muted); margin-left:7px; }
 
-  /* ── Worksheet ── */
-  .ws-intro{ font-size:13px; color:var(--muted); margin-bottom:4px; }
-  .wsblock{ border:1px solid var(--rule); border-radius:8px; padding:14px 16px; margin:12px 0; }
-  .wsblock .bar{ display:flex; align-items:center; gap:9px; margin-bottom:9px; }
-  .wsblock .bar .ti{ font-size:13.5px; font-weight:800; color:var(--navy); }
-  .fill{ font-size:12.5px; color:var(--navy); margin:9px 0; }
-  .fill .q{ font-weight:700; }
-  .line{ border-bottom:1.5px dotted #b9bec9; height:0; margin-top:16px; }
-  .line.sp{ margin-top:22px; }
-  .twocol{ display:flex; gap:18px; }
-  .twocol > div{ flex:1; }
+  .pit{ background:#fff8e1; border:1px solid var(--warn); border-radius:6px; padding:8px 12px;
+        font-size:11.5px; line-height:1.5; margin:12px 0; }
+  .pit b{ color:#9a6200; }
 
-  /* ── Webinar / CTA ── */
-  .wbox{ background:var(--navy); color:#fff; border-radius:10px; padding:22px 24px; margin:18px 0; }
-  .wbox .k{ font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-            color:var(--green); margin-bottom:6px; }
-  .wbox .ti{ font-size:23px; font-weight:800; line-height:1.1; }
-  .wbox .sub{ font-size:14px; color:#c7cbd6; margin-top:3px; }
-  .wbox .when{ font-size:12.5px; color:var(--green); font-weight:700; margin-top:12px;
-               letter-spacing:.02em; }
-  .arrow{ display:flex; gap:11px; margin:10px 0; align-items:flex-start; }
-  .arrow .a{ color:var(--green-deep); font-weight:800; font-size:15px; line-height:1.3; }
-  .arrow .t{ font-size:13.5px; }
-  .cta{ border:1px solid var(--rule); border-left:4px solid var(--green);
-        border-radius:6px; padding:15px 18px; margin-top:18px; background:var(--callout-bg); }
-  .cta .h{ font-size:15px; font-weight:800; color:var(--navy); margin-bottom:4px; }
-  .cta p{ font-size:13px; margin:0; color:#33384a; }
+  .wbox{ background:var(--navy); color:#fff; border-radius:9px; padding:14px 17px; margin-top:12px;
+         display:flex; justify-content:space-between; align-items:center; gap:16px; }
+  .wbox .k{ font-size:9px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--green); }
+  .wbox .ti{ font-size:19px; font-weight:800; line-height:1.05; }
+  .wbox .when{ font-size:11.5px; color:var(--green); font-weight:700; margin-top:5px; }
+  .wbox .r{ text-align:right; font-size:11px; color:#c7cbd6; max-width:2.5in; }
+  .wbox .r b{ color:#fff; }
 
-  /* ── Cover ── */
-  .cover{ padding:0; }
-  .cover .topbar{ height:14px; background:var(--green); }
-  .cover .inner{ padding:0.9in 0.95in 0.85in; height:calc(11in - 14px);
-                 display:flex; flex-direction:column; }
-  .cover img.logo{ height:34px; align-self:flex-start; }
-  .cover .title{ font-size:62px; line-height:0.98; font-weight:800; letter-spacing:-.02em;
-                 color:var(--navy); margin:0; }
-  .cover .title .dot{ color:var(--green); }
-  .cover .csub{ font-size:17px; color:#33384a; max-width:5.6in; margin-top:18px; line-height:1.45; }
-  .cover .meta{ display:flex; justify-content:space-between; border-top:1px solid var(--rule);
-                padding-top:14px; }
-  .cover .meta .k{ font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-                   color:var(--muted); }
-  .cover .meta .v{ font-size:15px; font-weight:800; color:var(--navy); margin-top:5px; }
-  .cover .meta .vs{ font-size:12.5px; color:var(--muted); margin-top:2px; }
-  .cover .meta a{ color:var(--blue); text-decoration:none; font-weight:700; font-size:12.5px; }
-  .spacer{ flex:1; }
+  .foot{ position:absolute; left:0.62in; right:0.62in; bottom:0.32in; }
+  .foot .ac{ height:2px; background:var(--green); margin-bottom:6px; }
+  .foot .rw{ display:flex; justify-content:space-between; font-size:8.5px; color:var(--muted); }
+  .foot .rw b{ color:var(--navy); }
 
-  /* ── Screen-only presentation (does not affect print / PDF export) ── */
   @media screen{
-    body{ background:#e9ecf1; padding:32px 16px; }
-    .page{
-      margin:0 auto 28px;
-      background:#fff;
-      box-shadow:0 6px 24px rgba(22,25,37,.14);
-      border-radius:4px;
-    }
-    .cover .topbar{ border-radius:4px 4px 0 0; }
+    body{ background:#e9ecf1; padding:30px 14px; }
+    .page{ margin:0 auto 26px; background:#fff; box-shadow:0 6px 22px rgba(22,25,37,.14); border-radius:4px; }
+    .topbar{ border-radius:4px 4px 0 0; }
   }
 </style>
 </head>
 <body>
 
-<!-- ───────────────────────── COVER ───────────────────────── -->
-<section class="page cover">
+<!-- ───────── PAGE 1 ───────── -->
+<section class="page">
   <div class="topbar"></div>
-  <div class="inner">
-    <img class="logo" src="safepoint-logo.svg" alt="SafePoint IT">
-    <div style="height:1.1in"></div>
-    <div class="eyebrow" style="color:var(--green-deep)">Webinar Registration Bonus</div>
-    <h1 class="title">Agentic AI<br>Quick-Start<br>Guide<span class="dot">.</span></h1>
-    <div class="csub">A checklist, a setup walkthrough, and a fill-in worksheet for
-      designing your first AI agent — built for business operators, not engineers.</div>
-    <div class="spacer"></div>
-    <div class="meta">
-      <div>
-        <div class="k">Prepared for</div>
-        <div class="v">Inside the Build</div>
-        <div class="vs">July 23, 2026 &nbsp;·&nbsp; 3:00 PM CDT</div>
-      </div>
-      <div style="text-align:right">
-        <div class="k">Published by</div>
-        <div class="v">SafePoint IT</div>
-        <div class="vs"><a href="https://safepointit.com">safepointit.com</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ───────────────────────── 01 WELCOME ───────────────────────── -->
-<section class="page">
-  <div class="rh"><img src="safepoint-logo.svg" alt="SafePoint IT"><div class="sec">01 · <b>Welcome</b></div></div>
-
-  <div class="eyebrow">Start here</div>
-  <h1>Welcome.</h1>
-  <p class="lede">Thanks for registering for <strong>Inside the Build</strong>. This short guide
-    gives you a head start before we meet on July 23. Spend 15 minutes with it and you'll arrive
-    with the right mental model, a clear shortlist of decisions to make, and a worksheet you can
-    fill in for a real task in your business this month.</p>
-
-  <h2>What is agentic AI?</h2>
-  <p><strong>Generative AI</strong> creates content and answers questions. You ask, it responds.
-    It's the kind of AI you've been using in chat tools for the last few years.</p>
-  <p><strong>Agentic AI</strong> takes actions across your systems — email, tickets, calendars,
-    files, workflows. You give it a job, and it carries out the steps. It can move, send, update,
-    route, and execute. That's a step-change in leverage. It's also a step-change in risk.</p>
-
-  <div class="callout">
-    <div class="k">The shift, in one line</div>
-    <div class="big">Generative AI changed how we think.<br>Agentic AI changes how work gets done.</div>
+  <div class="head">
+    <img src="safepoint-logo.svg" alt="SafePoint IT">
+    <span class="kb">Webinar Registration Bonus</span>
   </div>
 
-  <h2>Why this matters for your business</h2>
-  <p>A small team with an agentic agent doesn't get more <em>answers</em>. It gets more <em>done</em>.
-    That's the leverage. The downside is that an agent acting on your behalf creates more surface
-    area for mistakes — wrong recipients, wrong updates, wrong actions taken in your name. The rest
-    of this guide is about capturing the leverage and avoiding that downside.</p>
+  <h1>Agentic AI Quick-Start Guide<span class="dot">.</span></h1>
+  <p class="sub">A checklist and setup walkthrough for designing your first AI agent —
+    built for business operators, not engineers. Tick the boxes you can already check; the rest is where to start.</p>
 
-  <div class="callout">
-    <div class="k">The framework we'll build on the 23rd</div>
-    <div style="font-size:13.5px;line-height:1.6;color:#33384a;margin-top:2px">
-      Every agent worth shipping comes down to three decisions. This guide walks you through all
-      three, and we'll design one live on the webinar.<br>
-      <span class="chip">Brief</span> &nbsp;the one job, defined tightly &nbsp;·&nbsp;
-      <span class="chip lane">Lane</span> &nbsp;what it may and may not do &nbsp;·&nbsp;
-      <span class="chip loop">Loop</span> &nbsp;how a human stays in control
-    </div>
+  <p class="what"><b>Generative AI answers</b> questions. <b>Agentic AI acts</b> — across your email,
+    tickets, files, and workflows. That's a step-change in leverage, and a step-change in risk.
+    Capturing one without the other is the whole game.</p>
+
+  <div class="fw">
+    Every agent worth shipping comes down to three decisions — we'll design one live on July 23:<br>
+    <span class="chip">Brief</span> the one job, defined tightly &nbsp;·&nbsp;
+    <span class="chip lane">Lane</span> what it may &amp; may not do &nbsp;·&nbsp;
+    <span class="chip loop">Loop</span> how a human stays in control
   </div>
 
-  <div class="rf"><div class="accent"></div><div class="row">
-    <span>Agentic AI Quick-Start Guide &nbsp;·&nbsp; <b>SafePoint IT</b></span><span>2</span></div></div>
-</section>
-
-<!-- ───────────────────────── 02 READINESS CHECKLIST ───────────────────────── -->
-<section class="page">
-  <div class="rh"><img src="safepoint-logo.svg" alt="SafePoint IT"><div class="sec">02 · <b>Readiness Checklist</b></div></div>
-
-  <div class="eyebrow">The readiness checklist</div>
-  <h1>Before you build, check these 10 things.</h1>
-  <p class="dim" style="margin-top:-2px">Three categories, mapped to the framework. If you can't
-    tick a box yet, that's where to focus first.</p>
+  <div class="seclabel">Readiness checklist · before you build</div>
+  <p class="secnote">Three categories, ten items. Can't tick a box yet? That's your starting point.</p>
 
   <div class="catrow"><span class="cat">Foundation</span><span class="chip">Brief</span></div>
-  <div class="item"><div class="box"></div><div><div class="t"><span class="num">01</span>You have one specific task in mind — not a category, a single task.</div>
-    <div class="d">“Automate our sales process” is a category. “Draft a follow-up email after every discovery call” is a task.</div></div></div>
-  <div class="item"><div class="box"></div><div><div class="t"><span class="num">02</span>The task is repetitive and follows a predictable pattern.</div>
-    <div class="d">If the steps change every time, the agent has nothing to learn from.</div></div></div>
-  <div class="item"><div class="box"></div><div><div class="t"><span class="num">03</span>The data the agent needs is clean, organized, and accessible.</div>
-    <div class="d">Garbage in, faster garbage out. Fix the data first.</div></div></div>
+  <label class="item"><input type="checkbox"><span class="t">One specific task in mind — a single task, not a category. <span class="h">“Draft a follow-up after every discovery call,” not “automate sales.”</span></span></label>
+  <label class="item"><input type="checkbox"><span class="t">The task is repetitive and follows a predictable pattern. <span class="h">If the steps change every time, there's nothing to learn.</span></span></label>
+  <label class="item"><input type="checkbox"><span class="t">The data it needs is clean, organized, and accessible. <span class="h">Garbage in, faster garbage out.</span></span></label>
 
   <div class="catrow"><span class="cat">Ownership &amp; Success</span><span class="chip">Brief</span></div>
-  <div class="item"><div class="box"></div><div><div class="t"><span class="num">04</span>You have a named human owner for the agent.</div>
-    <div class="d">Someone who watches it, fixes it, and is on the hook when it goes wrong.</div></div></div>
-  <div class="item"><div class="box"></div><div><div class="t"><span class="num">05</span>You can describe success in one sentence.</div>
-    <div class="d">If success is vague, the agent will be vague.</div></div></div>
-  <div class="item"><div class="box"></div><div><div class="t"><span class="num">06</span>You can describe failure in one sentence.</div>
-    <div class="d">Knowing what “going wrong” looks like is how you catch it early.</div></div></div>
+  <label class="item"><input type="checkbox"><span class="t">A named human owner. <span class="h">Watches it, fixes it, on the hook when it's wrong.</span></span></label>
+  <label class="item"><input type="checkbox"><span class="t">You can describe success in one sentence. <span class="h">Vague success → vague agent.</span></span></label>
+  <label class="item"><input type="checkbox"><span class="t">You can describe failure in one sentence. <span class="h">Knowing “wrong” is how you catch it early.</span></span></label>
 
   <div class="catrow"><span class="cat">Guardrails &amp; Oversight</span><span class="chip lane">Lane</span><span class="chip loop">Loop</span></div>
-  <div class="item"><div class="box"></div><div><div class="t"><span class="num">07</span>You've defined what the agent IS allowed to do.</div>
-    <div class="d">Explicit allow lists are clearer than “use good judgment.”</div></div></div>
-  <div class="item"><div class="box"></div><div><div class="t"><span class="num">08</span>You've defined what the agent is NOT allowed to do.</div>
-    <div class="d">Spell out the hard nos — don't assume they're obvious.</div></div></div>
-  <div class="item"><div class="box"></div><div><div class="t"><span class="num">09</span>You have a human review step in the workflow.</div>
-    <div class="d">Especially for outbound actions: emails sent, records updated, money moved.</div></div></div>
-  <div class="item"><div class="box"></div><div><div class="t"><span class="num">10</span>You have an escalation path when things go wrong.</div>
-    <div class="d">Who gets the alert, how fast, and what they're empowered to do about it.</div></div></div>
+  <label class="item"><input type="checkbox"><span class="t">Defined what it IS allowed to do. <span class="h">An allow list beats “use good judgment.”</span></span></label>
+  <label class="item"><input type="checkbox"><span class="t">Defined what it is NOT allowed to do. <span class="h">Spell out the hard nos.</span></span></label>
+  <label class="item"><input type="checkbox"><span class="t">A human review step in the workflow. <span class="h">Especially for anything sent, updated, or paid.</span></span></label>
+  <label class="item"><input type="checkbox"><span class="t">An escalation path when things go wrong. <span class="h">Who's alerted, how fast, with what authority.</span></span></label>
 
-  <div class="rf"><div class="accent"></div><div class="row">
-    <span>Agentic AI Quick-Start Guide &nbsp;·&nbsp; <b>SafePoint IT</b></span><span>3</span></div></div>
+  <div class="foot"><div class="ac"></div><div class="rw">
+    <span>Agentic AI Quick-Start Guide &nbsp;·&nbsp; <b>SafePoint IT</b> &nbsp;·&nbsp; safepointit.com</span><span>1 / 2</span></div></div>
 </section>
 
-<!-- ───────────────────────── 03 SETUP WALKTHROUGH (1-4) ───────────────────────── -->
+<!-- ───────── PAGE 2 ───────── -->
 <section class="page">
-  <div class="rh"><img src="safepoint-logo.svg" alt="SafePoint IT"><div class="sec">03 · <b>Setup Walkthrough</b></div></div>
+  <div class="topbar"></div>
+  <div class="conthead"><img src="safepoint-logo.svg" alt="SafePoint IT"><span class="s">Setup walkthrough &amp; what's next</span></div>
 
-  <div class="eyebrow">The setup walkthrough</div>
-  <h1>From idea to working agent.</h1>
-  <p class="dim" style="margin-top:-2px">Seven concrete steps. Run them in order. You can do the
-    first three with a notebook — no software required.</p>
+  <h1 style="font-size:25px;margin-top:13px">From idea to working agent.</h1>
+  <p class="sub" style="margin-bottom:8px">Seven steps, in order. The first three need nothing but a notebook.</p>
 
-  <div style="margin:14px 0 4px"><span class="chip">Brief</span>
-    <span class="dim" style="font-size:12px;margin-left:6px">Steps 1–3 — define the one job.</span></div>
+  <div class="grp"><span class="chip">Brief</span><span class="lbl">Define the one job.</span></div>
+  <div class="step"><div class="n">1</div><div class="t"><b>Document the task as it works today</b> — who does it, what triggers it, what they produce, where it breaks. You can't automate what you can't describe.</div></div>
+  <div class="step"><div class="n">2</div><div class="t"><b>Define inputs and outputs explicitly</b> — every input it needs, every output it must produce. Most early failures are interface problems, not intelligence problems.</div></div>
+  <div class="step"><div class="n">3</div><div class="t"><b>Write the one-sentence brief</b> — “This agent's only job is to ______.” If it won't fit in one sentence, the scope is too big.</div></div>
 
-  <div class="step"><div class="n">1</div><div class="body">
-    <div class="h">Document the task as it works today</div>
-    <p><span class="lab">What to do —</span> Write down the current process step by step: who does it, what triggers it, what they produce, and where it commonly breaks.</p>
-    <p><span class="lab why">Why it matters —</span> You can't automate what you can't describe. This step alone often reveals the task isn't well-defined enough yet.</p>
-  </div></div>
+  <div class="grp"><span class="chip lane">Lane</span><span class="lbl">Set the boundaries before it acts.</span></div>
+  <div class="step"><div class="n">4</div><div class="t"><b>Set the lane — allow &amp; deny lists</b> — two short lists of what it IS and is NOT allowed to do: actions, systems, recipients, topics. AI defaults to helpful; without limits, helpful becomes harmful.</div></div>
 
-  <div class="step"><div class="n">2</div><div class="body">
-    <div class="h">Define inputs and outputs explicitly</div>
-    <p><span class="lab">What to do —</span> List every input the agent needs (data, context, instructions, access) and every output it must produce (format, destination, frequency).</p>
-    <p><span class="lab why">Why it matters —</span> Most early agent failures aren't intelligence problems. They're interface problems.</p>
-  </div></div>
+  <div class="grp"><span class="chip loop">Loop</span><span class="lbl">Keep a human in control.</span></div>
+  <div class="step"><div class="n">5</div><div class="t"><b>Build the human checkpoint</b> — who reviews, when, and with what authority to stop or approve. Trust is earned one verified output at a time.</div></div>
+  <div class="step"><div class="n">6</div><div class="t"><b>Run a parallel trial</b> — 2–4 weeks producing alongside the human process; log every disagreement. You learn where it fails before it fails at scale.</div></div>
+  <div class="step"><div class="n">7</div><div class="t"><b>Define your kill switch</b> — what triggers shutdown, and who can pull it. Decide before something goes wrong, not under pressure.</div></div>
 
-  <div class="step"><div class="n">3</div><div class="body">
-    <div class="h">Write the one-sentence brief</div>
-    <p><span class="lab">What to do —</span> Complete this sentence: “This agent's only job is to ________.” If you can't fit it in one sentence, the scope is too big.</p>
-    <p><span class="lab why">Why it matters —</span> Vagueness is the number-one reason early agent projects fail. Specificity is your friend.</p>
-  </div></div>
-
-  <div style="margin:18px 0 4px"><span class="chip lane">Lane</span>
-    <span class="dim" style="font-size:12px;margin-left:6px">Step 4 — set the boundaries before it acts.</span></div>
-
-  <div class="step"><div class="n">4</div><div class="body">
-    <div class="h">Set the lane — allow and deny lists</div>
-    <p><span class="lab">What to do —</span> Make two short lists. What the agent IS allowed to do. What it is NOT allowed to do. Be specific. Include actions, systems, recipients, and topics.</p>
-    <p><span class="lab why">Why it matters —</span> AI defaults to helpful. Without explicit limits, helpful becomes harmful.</p>
-  </div></div>
-
-  <div class="rf"><div class="accent"></div><div class="row">
-    <span>Agentic AI Quick-Start Guide &nbsp;·&nbsp; <b>SafePoint IT</b></span><span>4</span></div></div>
-</section>
-
-<!-- ───────────────────────── 03 SETUP WALKTHROUGH (5-7) ───────────────────────── -->
-<section class="page">
-  <div class="rh"><img src="safepoint-logo.svg" alt="SafePoint IT"><div class="sec">03 · <b>Setup Walkthrough · continued</b></div></div>
-
-  <div class="eyebrow">Steps 5–7</div>
-  <h1>Once it works, prove it works.</h1>
-  <p class="dim" style="margin-top:-2px">The last three steps are where most teams skip ahead and
-    regret it. Don't.</p>
-
-  <div style="margin:14px 0 4px"><span class="chip loop">Loop</span>
-    <span class="dim" style="font-size:12px;margin-left:6px">Steps 5–7 — keep a human in control.</span></div>
-
-  <div class="step"><div class="n">5</div><div class="body">
-    <div class="h">Build the human checkpoint</div>
-    <p><span class="lab">What to do —</span> Decide who reviews, when they review, and what authority they have to stop, change, or approve the output.</p>
-    <p><span class="lab why">Why it matters —</span> Trust is built one verified output at a time. Don't go fully autonomous before you've earned the right to.</p>
-  </div></div>
-
-  <div class="step"><div class="n">6</div><div class="body">
-    <div class="h">Run a parallel trial</div>
-    <p><span class="lab">What to do —</span> For two to four weeks, let the agent produce alongside the existing human process. Compare outputs side by side and log every disagreement.</p>
-    <p><span class="lab why">Why it matters —</span> You learn where the agent fails before it fails at scale. The trial is where the real design work happens.</p>
-  </div></div>
-
-  <div class="step"><div class="n">7</div><div class="body">
-    <div class="h">Define your kill switch</div>
-    <p><span class="lab">What to do —</span> Decide in advance what triggers shutting it down — and who has the authority to pull the trigger. Document both.</p>
-    <p><span class="lab why">Why it matters —</span> When something goes wrong, you don't want to be making policy under pressure.</p>
-  </div></div>
-
-  <div class="callout" style="margin-top:22px">
-    <div class="k">Bring this to the webinar</div>
-    <div style="font-size:13.5px;color:#33384a;line-height:1.55">Fill in the one-page brief on the next
-      page for a real task in your business. On July 23 we'll workshop live agents — yours could be one of them.</div>
-  </div>
-
-  <div class="rf"><div class="accent"></div><div class="row">
-    <span>Agentic AI Quick-Start Guide &nbsp;·&nbsp; <b>SafePoint IT</b></span><span>5</span></div></div>
-</section>
-
-<!-- ───────────────────────── 04 COMMON PITFALLS ───────────────────────── -->
-<section class="page">
-  <div class="rh"><img src="safepoint-logo.svg" alt="SafePoint IT"><div class="sec">04 · <b>Common Pitfalls</b></div></div>
-
-  <div class="eyebrow">Common pitfalls</div>
-  <h1>Five mistakes to skip.</h1>
-  <p class="dim" style="margin-top:-2px">Every one of these shows up in our work with clients.
-    Catching them now is much cheaper than catching them later.</p>
-
-  <div class="pit"><div class="x">✕</div><div><div class="h">Going too big, too fast</div>
-    <p>“Let's automate the entire department.” Don't. Pick one boring, valuable, repeatable task and build that one well. Earn the right to scope up.</p></div></div>
-  <div class="pit"><div class="x">✕</div><div><div class="h">Skipping the human review</div>
-    <p>Trust is earned, not granted. Build the review step in from day one and remove it gradually — not the other way around.</p></div></div>
-  <div class="pit"><div class="x">✕</div><div><div class="h">Pointing the agent at messy data</div>
-    <p>The agent inherits your data quality issues and then amplifies them at speed. Spend a week on data hygiene before you spend a week on agent design.</p></div></div>
-  <div class="pit"><div class="x">✕</div><div><div class="h">Ignoring prompt injection</div>
-    <p>Inputs (documents, emails, web pages) can contain hidden instructions that an agent will follow. Assume hostile content exists, and limit what your agent can do with information from outside sources.</p></div></div>
-  <div class="pit"><div class="x">✕</div><div><div class="h">No defined success metric</div>
-    <p>If you can't measure it, you can't manage it. Pick one number that defines success and one that defines failure — and watch both.</p></div></div>
-
-  <div class="rf"><div class="accent"></div><div class="row">
-    <span>Agentic AI Quick-Start Guide &nbsp;·&nbsp; <b>SafePoint IT</b></span><span>6</span></div></div>
-</section>
-
-<!-- ───────────────────────── 05 WORKSHEET ───────────────────────── -->
-<section class="page">
-  <div class="rh"><img src="safepoint-logo.svg" alt="SafePoint IT"><div class="sec">05 · <b>Your One-Page Brief</b></div></div>
-
-  <div class="eyebrow">Fill this in</div>
-  <h1>Your first agent, on one page.</h1>
-  <p class="ws-intro">Print this page. Pick one real task and fill it in. You'll leave the webinar with it built.</p>
-
-  <div class="wsblock">
-    <div class="bar"><span class="chip">Brief</span><span class="ti">The one job</span></div>
-    <div class="fill"><span class="q">This agent's only job is to</span></div>
-    <div class="line"></div><div class="line sp"></div>
-    <div class="twocol" style="margin-top:14px">
-      <div><div class="fill"><span class="q">Top 3 inputs it needs</span></div><div class="line"></div><div class="line sp"></div><div class="line sp"></div></div>
-      <div><div class="fill"><span class="q">Outputs it must produce</span></div><div class="line"></div><div class="line sp"></div><div class="line sp"></div></div>
-    </div>
-    <div class="twocol" style="margin-top:14px">
-      <div><div class="fill"><span class="q">Named human owner</span></div><div class="line"></div></div>
-      <div><div class="fill"><span class="q">Success in one sentence</span></div><div class="line"></div></div>
-    </div>
-  </div>
-
-  <div class="wsblock">
-    <div class="bar"><span class="chip lane">Lane</span><span class="ti">The boundaries</span></div>
-    <div class="twocol">
-      <div><div class="fill"><span class="q">IS allowed to…</span></div><div class="line"></div><div class="line sp"></div><div class="line sp"></div></div>
-      <div><div class="fill"><span class="q">Is NOT allowed to…</span></div><div class="line"></div><div class="line sp"></div><div class="line sp"></div></div>
-    </div>
-  </div>
-
-  <div class="wsblock">
-    <div class="bar"><span class="chip loop">Loop</span><span class="ti">The oversight</span></div>
-    <div class="twocol">
-      <div><div class="fill"><span class="q">Who reviews, and when</span></div><div class="line"></div><div class="line sp"></div></div>
-      <div><div class="fill"><span class="q">Kill switch: trigger &amp; who pulls it</span></div><div class="line"></div><div class="line sp"></div></div>
-    </div>
-  </div>
-
-  <div class="rf"><div class="accent"></div><div class="row">
-    <span>Agentic AI Quick-Start Guide &nbsp;·&nbsp; <b>SafePoint IT</b></span><span>7</span></div></div>
-</section>
-
-<!-- ───────────────────────── 06 WHAT'S NEXT ───────────────────────── -->
-<section class="page">
-  <div class="rh"><img src="safepoint-logo.svg" alt="SafePoint IT"><div class="sec">06 · <b>What's Next</b></div></div>
-
-  <div class="eyebrow">What's next</div>
-  <h1>See you on the 23rd.</h1>
-  <p class="lede">On July 23 we'll go deeper than this guide can — a live walkthrough of designing one
-    real agent end to end, the full <strong>Brief · Lane · Loop</strong> framework, and Q&amp;A with our team.</p>
+  <div class="pit"><b>Five traps to skip:</b> going too big too fast &nbsp;·&nbsp; skipping the human review &nbsp;·&nbsp;
+    pointing it at messy data &nbsp;·&nbsp; ignoring prompt injection (hidden instructions in documents &amp; emails) &nbsp;·&nbsp;
+    no defined success metric. Catching these now is far cheaper than later.</div>
 
   <div class="wbox">
-    <div class="k">Live Webinar</div>
-    <div class="ti">Inside the Build</div>
-    <div class="sub">AI Agents That Stay in Their Lane</div>
-    <div class="when">July 23, 2026 &nbsp;·&nbsp; 3:00 PM CDT &nbsp;·&nbsp; 60 minutes</div>
+    <div>
+      <div class="k">Live Webinar · Inside the Build</div>
+      <div class="ti">AI Agents That Stay in Their Lane</div>
+      <div class="when">July 23, 2026 &nbsp;·&nbsp; 3:00 PM CDT &nbsp;·&nbsp; 60 min</div>
+    </div>
+    <div class="r">We build one real agent end to end with the full <b>Brief · Lane · Loop</b> framework — live Q&amp;A, bring your task.
+      Ask about our <b>AI Discovery Workshop</b> &amp; <b>AI Readiness Review</b> at <b>safepointit.com</b>.</div>
   </div>
 
-  <h2 style="font-size:17px;margin-top:6px">A preview of what you'll get</h2>
-  <div class="arrow"><div class="a">→</div><div class="t">The full <strong>Brief · Lane · Loop</strong> framework, applied to a real task</div></div>
-  <div class="arrow"><div class="a">→</div><div class="t">Live design of one agent, from blank page to working build</div></div>
-  <div class="arrow"><div class="a">→</div><div class="t">The guardrails and oversight patterns we use with clients</div></div>
-  <div class="arrow"><div class="a">→</div><div class="t">Live Q&amp;A — bring the one-page brief from this guide, we'll workshop it</div></div>
-
-  <div class="cta">
-    <div class="h">Want help applying this to your business?</div>
-    <p>Ask about our <strong>AI Discovery Workshop</strong> and <strong>AI Readiness Review</strong> —
-      we'll map your highest-leverage first agent with you. Reply to your registration email or visit
-      <strong>safepointit.com</strong> to start.</p>
-  </div>
-
-  <div class="rf"><div class="accent"></div><div class="row">
-    <span>Agentic AI Quick-Start Guide &nbsp;·&nbsp; <b>SafePoint IT</b></span><span>8</span></div></div>
+  <div class="foot"><div class="ac"></div><div class="rw">
+    <span>Agentic AI Quick-Start Guide &nbsp;·&nbsp; <b>SafePoint IT</b> &nbsp;·&nbsp; safepointit.com</span><span>2 / 2</span></div></div>
 </section>
 
+<script>
+  // Make checkboxes persist in the browser, and dim completed items.
+  (function(){
+    var boxes = document.querySelectorAll('.item input[type=checkbox]');
+    boxes.forEach(function(b,i){
+      var key = 'qsg-check-'+i;
+      try{ if(localStorage.getItem(key)==='1'){ b.checked=true; } }catch(e){}
+      var sync=function(){ b.closest('.item').classList.toggle('done', b.checked);
+        try{ localStorage.setItem(key, b.checked?'1':'0'); }catch(e){} };
+      b.addEventListener('change', sync); sync();
+    });
+  })();
+</script>
 </body>
 </html>
