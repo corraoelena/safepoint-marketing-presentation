@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AI Integration Readiness Assessment — SafePoint IT</title>
+<style>
+  :root{
+    --green:#C1D82F; --green-deep:#9bb00f; --navy:#161925; --blue:#0054AE;
+    --muted:#666; --rule:#e3e6ec; --callout:#f9fbe7; --warn:#f59e0b;
+    --red:#c0392b; --amber:#b97e00; --ok:#5f7d00;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:#eef1f5; color:var(--navy); line-height:1.5;
+        font-family:-apple-system,"Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif; font-size:16px; }
+  .wrap{ max-width:760px; margin:0 auto; padding:26px 18px 60px; }
+  .card{ background:#fff; border-radius:12px; box-shadow:0 6px 24px rgba(22,25,37,.10); overflow:hidden; }
+  .bar{ height:10px; background:var(--green); }
+  .pad{ padding:26px 30px; }
+
+  .head{ display:flex; align-items:center; justify-content:space-between; }
+  .head img{ height:26px; }
+  .eyebrow{ font-size:11px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--blue); }
+  h1{ font-size:30px; font-weight:800; letter-spacing:-.01em; line-height:1.08; margin:16px 0 8px; }
+  .lede{ font-size:16px; color:#33384a; margin:0 0 14px; }
+
+  .wf{ background:var(--callout); border:1px solid #e8eccb; border-left:4px solid var(--green);
+       border-radius:8px; padding:14px 16px; margin:18px 0 8px; }
+  .wf label{ display:block; font-weight:800; font-size:14px; margin-bottom:6px; }
+  .wf input{ width:100%; font-size:15px; padding:10px 12px; border:1.5px solid var(--rule);
+             border-radius:7px; font-family:inherit; }
+  .wf input:focus-visible{ outline:2px solid var(--blue); outline-offset:1px; border-color:var(--blue); }
+  .wf .hint{ font-size:12.5px; color:var(--muted); margin-top:6px; }
+
+  .dim{ margin-top:26px; }
+  .dimhead{ display:flex; align-items:center; gap:10px; border-bottom:2px solid var(--navy); padding-bottom:7px; }
+  .dimhead .t{ font-size:14px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+  .chip{ font-size:9px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:2px 8px;
+         border-radius:11px; border:1.5px solid var(--green); color:var(--navy); background:#fbfdef; }
+  .chip.lane{ border-color:var(--blue); } .chip.loop{ border-color:var(--navy); }
+
+  .q{ padding:14px 0; border-bottom:1px solid var(--rule); }
+  .q .qt{ font-weight:700; font-size:15px; margin-bottom:9px; }
+  .opts{ display:flex; gap:8px; flex-wrap:wrap; }
+  .opt{ flex:1; min-width:120px; }
+  .opt input{ position:absolute; opacity:0; width:0; height:0; }
+  .opt span{ display:block; text-align:center; font-size:13.5px; font-weight:700; padding:11px 8px;
+             border:1.5px solid var(--rule); border-radius:8px; cursor:pointer; min-height:44px; color:#333; }
+  .opt input:checked + span{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .opt input:focus-visible + span{ outline:2px solid var(--blue); outline-offset:2px; }
+
+  .actions{ margin-top:24px; }
+  .btn{ display:inline-block; background:var(--green); color:var(--navy); font-weight:800; font-size:16px;
+        border:none; border-radius:9px; padding:14px 26px; cursor:pointer; text-decoration:none;
+        font-family:inherit; min-height:48px; }
+  .btn:focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
+  .note{ font-size:12.5px; color:var(--muted); margin-top:10px; }
+
+  /* results */
+  #results{ display:none; }
+  .scoreband{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  .ring{ flex:none; width:108px; height:108px; border-radius:50%; display:flex; align-items:center;
+         justify-content:center; flex-direction:column; color:#fff; }
+  .ring .pct{ font-size:30px; font-weight:800; line-height:1; }
+  .ring .lab{ font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; margin-top:3px; opacity:.9; }
+  .verdict h2{ font-size:23px; margin:0 0 4px; } .verdict p{ margin:0; color:#33384a; font-size:15px; }
+
+  .dims{ margin-top:22px; }
+  .drow{ display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--rule); }
+  .drow .nm{ flex:1; font-weight:700; font-size:14.5px; }
+  .track{ flex:none; width:160px; height:9px; background:#eceef2; border-radius:5px; overflow:hidden; }
+  .track i{ display:block; height:100%; }
+  .pill{ flex:none; width:64px; text-align:center; font-size:10px; font-weight:800; letter-spacing:.05em;
+         text-transform:uppercase; padding:3px 0; border-radius:6px; color:#fff; }
+
+  .road{ margin-top:24px; }
+  .road h3{ font-size:15px; letter-spacing:.04em; text-transform:uppercase; color:var(--blue); margin:0 0 8px; }
+  .step{ display:flex; gap:11px; padding:9px 0; border-bottom:1px solid var(--rule); }
+  .step .ic{ flex:none; width:24px; height:24px; border-radius:6px; background:var(--navy); color:#fff;
+             font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .step .st{ font-size:14.5px; }
+  .cta{ background:var(--navy); color:#fff; border-radius:10px; padding:20px 22px; margin-top:24px;
+        display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap; }
+  .cta .h{ font-size:18px; font-weight:800; } .cta .s{ font-size:13.5px; color:#c7cbd6; max-width:3in; }
+
+  .foot{ text-align:center; font-size:12px; color:var(--muted); margin-top:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="bar"></div>
+    <div class="pad">
+
+      <!-- intro -->
+      <div id="intro">
+        <div class="head">
+          <img src="safepoint-logo.svg" alt="SafePoint IT">
+          <span class="eyebrow">AI Integration Readiness</span>
+        </div>
+        <h1>Is your workflow ready to become an AI agent?</h1>
+        <p class="lede">Pick one task you're thinking about handing to an AI agent and answer 12 quick
+          questions. You'll get an instant readiness score, a breakdown by area, and the exact next steps —
+          based on the same <b>Brief · Lane · Loop</b> framework SafePoint uses to build agents.</p>
+
+        <div class="wf">
+          <label for="wfname">The workflow I'm assessing</label>
+          <input id="wfname" type="text" placeholder="e.g., Draft a follow-up email after every discovery call">
+          <div class="hint">Be specific — one task, not a category. That alone is half the battle.</div>
+        </div>
+
+        <form id="quiz"></form>
+
+        <div class="actions">
+          <button class="btn" id="scoreBtn" type="button">See my readiness score →</button>
+          <div class="note">Self-serve and private — nothing is sent anywhere. Your answers stay in this browser.</div>
+        </div>
+      </div>
+
+      <!-- results -->
+      <div id="results">
+        <div class="head">
+          <img src="safepoint-logo.svg" alt="SafePoint IT">
+          <span class="eyebrow">Your readiness report</span>
+        </div>
+        <h1 id="wfTitle" style="font-size:22px;margin-bottom:14px"></h1>
+        <div class="scoreband">
+          <div class="ring" id="ring"><span class="pct" id="pct"></span><span class="lab">Readiness</span></div>
+          <div class="verdict"><h2 id="verdictH"></h2><p id="verdictP"></p></div>
+        </div>
+
+        <div class="dims" id="dims"></div>
+
+        <div class="road">
+          <h3>Your next steps</h3>
+          <div id="roadList"></div>
+        </div>
+
+        <div class="cta">
+          <div><div class="h">Ready to build it with us?</div>
+            <div class="s">Bring this report to your SafePoint team and we'll scope your first agent in one session.</div></div>
+          <a class="btn" href="https://safepointit.com">Book your build session →</a>
+        </div>
+
+        <div class="actions"><button class="btn" id="againBtn" type="button"
+             style="background:#fff;border:1.5px solid var(--rule)">↺ Assess another workflow</button></div>
+      </div>
+
+    </div>
+  </div>
+  <div class="foot">SafePoint IT · AI Integration Readiness Assessment · v1 · safepointit.com</div>
+</div>
+
+<script>
+const DIMS = [
+  { key:'Foundation', tag:'Brief', cls:'', qs:[
+    'We have one specific, single task in mind — not a category.',
+    'The task is repetitive and follows a predictable pattern.',
+    'The data the agent needs is clean, organized, and accessible.' ],
+    fix:'Tighten the brief: pick one repetitive task and clean its data before building.' },
+  { key:'Ownership & Success', tag:'Brief', cls:'', qs:[
+    'There is a named human owner for the agent.',
+    'We can describe success in one sentence.',
+    'We can describe failure in one sentence.' ],
+    fix:'Name an owner and write one-sentence success and failure definitions.' },
+  { key:'Guardrails & Oversight', tag:'Lane / Loop', cls:'lane', qs:[
+    'We have defined what the agent IS allowed to do.',
+    'We have defined what it is NOT allowed to do.',
+    'There is a human review step for outbound actions (emails, records, money).',
+    'There is an escalation path when something goes wrong.' ],
+    fix:'Draft allow/deny lists, a human review step, and an escalation path before going live.' },
+  { key:'Technical Feasibility', tag:'5 Connections', cls:'loop', qs:[
+    'We know which systems the agent must connect to (email, CRM, files, etc.).',
+    'Those systems can be reached through integrations or APIs we have or can get.' ],
+    fix:'Map the systems the agent must touch and confirm integration access — your “5 connections.”' }
+];
+const CHOICES = [['Yes',2],['Somewhat',1],['Not yet',0]];
+
+// build questions
+const quiz = document.getElementById('quiz'); let qi = 0; const meta = [];
+DIMS.forEach((d,di)=>{
+  const sec = document.createElement('div'); sec.className='dim';
+  sec.innerHTML = '<div class="dimhead"><span class="t">'+d.key+'</span>'+
+    '<span class="chip '+d.cls+'">'+d.tag+'</span></div>';
+  d.qs.forEach(q=>{
+    const idx = qi++; meta.push(di);
+    const opts = CHOICES.map(c=>'<label class="opt"><input type="radio" name="q'+idx+'" value="'+c[1]+'">'+
+      '<span>'+c[0]+'</span></label>').join('');
+    const el = document.createElement('div'); el.className='q';
+    el.innerHTML = '<div class="qt">'+q+'</div><div class="opts">'+opts+'</div>';
+    sec.appendChild(el);
+  });
+  quiz.appendChild(sec);
+});
+const NQ = qi;
+
+function band(p){ return p>=75 ? ['ok','#5f7d00'] : p>=40 ? ['amber','#b97e00'] : ['red','#c0392b']; }
+function score(){
+  const per = DIMS.map(()=>({sum:0,max:0}));
+  for(let i=0;i<NQ;i++){
+    const di = meta[i]; per[di].max += 2;
+    const sel = document.querySelector('input[name=q'+i+']:checked');
+    per[di].sum += sel ? +sel.value : 0;
+  }
+  const total = per.reduce((a,b)=>a+b.sum,0), max = per.reduce((a,b)=>a+b.max,0);
+  return { pct: Math.round(total/max*100), per: per.map((p,i)=>({...p, pct:Math.round(p.sum/p.max*100), dim:DIMS[i]})) };
+}
+function showResults(){
+  const r = score(); const wf = (document.getElementById('wfname').value||'').trim();
+  document.getElementById('wfTitle').textContent = wf ? '“'+wf+'”' : 'Your workflow';
+  const [, col] = band(r.pct);
+  const ring = document.getElementById('ring'); ring.style.background = col;
+  document.getElementById('pct').textContent = r.pct+'%';
+  let h,p;
+  if(r.pct>=75){ h='Ready to build.'; p='Strong foundation. The next move is to scope and build this agent.'; }
+  else if(r.pct>=50){ h='Almost ready.'; p='Close. Shore up the amber/red areas below, then build.'; }
+  else { h='Foundation first.'; p='Worth doing — but fix the basics below before handing this to an agent.'; }
+  document.getElementById('verdictH').textContent = h; document.getElementById('verdictP').textContent = p;
+
+  const dims = document.getElementById('dims'); dims.innerHTML='';
+  r.per.forEach(pd=>{
+    const [lab,c] = band(pd.pct);
+    const labels={ok:'Ready',amber:'Shore up',red:'Gap'};
+    dims.innerHTML += '<div class="drow"><span class="nm">'+pd.dim.key+'</span>'+
+      '<span class="track"><i style="width:'+pd.pct+'%;background:'+c+'"></i></span>'+
+      '<span class="pill" style="background:'+c+'">'+labels[lab]+'</span></div>';
+  });
+
+  const road = document.getElementById('roadList'); road.innerHTML=''; let n=1;
+  const weak = r.per.filter(pd=>pd.pct<75).sort((a,b)=>a.pct-b.pct);
+  if(weak.length===0){
+    road.innerHTML = '<div class="step"><div class="ic">1</div><div class="st">'+
+      'You’re build-ready. Book a session to scope the brief, lane, and loop and start the build.</div></div>';
+  } else {
+    weak.forEach(pd=>{ road.innerHTML += '<div class="step"><div class="ic">'+(n++)+'</div><div class="st"><b>'+
+      pd.dim.key+':</b> '+pd.dim.fix+'</div></div>'; });
+  }
+  document.getElementById('intro').style.display='none';
+  document.getElementById('results').style.display='block';
+  window.scrollTo(0,0);
+}
+document.getElementById('scoreBtn').addEventListener('click', showResults);
+document.getElementById('againBtn').addEventListener('click', ()=>{
+  document.getElementById('results').style.display='none';
+  document.getElementById('intro').style.display='block'; window.scrollTo(0,0);
+});
+
+// demo prefill for review screenshots: append #demo to the URL
+if(location.hash==='#demo'){
+  document.getElementById('wfname').value='Draft a follow-up email after every discovery call';
+  const pat=[2,2,1, 2,1,0, 1,0,1,0, 2,1];
+  for(let i=0;i<NQ;i++){ const v=pat[i]; const el=document.querySelector('input[name=q'+i+'][value="'+v+'"]'); if(el) el.checked=true; }
+  showResults();
+}
+</script>
+</body>
+</html>
